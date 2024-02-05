@@ -9,5 +9,11 @@ export default {
   app_popup_close_button_label: 'Tutup',
 
   app_text_login: 'Masuk',
-  app_text_password: 'Kata Sandi'
+  app_text_password: 'Kata Sandi',
+  app_table_name: 'Nama',
+  app_table_action: 'Aksi',
+  app_button_add: 'Tambah',
+  app_placeholder_search: 'Cari',
+  app_text_department: 'Departemen',
+  app_text_project: 'Projek'
 };

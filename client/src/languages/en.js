@@ -10,4 +10,11 @@ export default {
 
   app_text_login: 'Login',
   app_text_password: 'Password',
+  app_table_name: 'Name',
+  app_table_action: 'Action',
+  app_button_add: 'Add',
+  app_placeholder_search: 'Search',
+
+  app_text_department: 'Department',
+  app_text_project: 'Project'
 };

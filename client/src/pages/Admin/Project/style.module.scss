@@ -1,0 +1,19 @@
+@import '../../../styles/base.scss';
+
+.container {
+  width: 100%;
+  @include directionY;
+  align-items: center;
+  .wrapper {
+    width: 80%;
+    @include directionY;
+    .feat {
+      @include directionX;
+      justify-content: space-between;
+      margin: 1rem 0rem;
+    }
+  }
+  .content::-webkit-scrollbar {
+    display: none;
+  }
+}
