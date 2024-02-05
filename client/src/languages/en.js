@@ -10,11 +10,17 @@ export default {
 
   app_text_login: 'Login',
   app_text_password: 'Password',
+
   app_table_name: 'Name',
   app_table_action: 'Action',
+  app_table_position: 'Position',
+
   app_button_add: 'Add',
   app_placeholder_search: 'Search',
+  app_no_data: 'Data Not Found',
+  app_no_data_filter: 'No matching data found',
 
   app_text_department: 'Department',
-  app_text_project: 'Project'
+  app_text_project: 'Project',
+  app_text_employee: 'Employee',
 };
