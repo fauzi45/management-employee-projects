@@ -1,4 +1,6 @@
 import * as React from 'react';
+import { useState } from 'react';
+
 import Paper from '@mui/material/Paper';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
@@ -11,8 +13,10 @@ import TextField from '@mui/material/TextField';
 import InputAdornment from '@mui/material/InputAdornment';
 import IconButton from '@mui/material/IconButton';
 import SearchIcon from '@mui/icons-material/Search';
+import Button from '@mui/material/Button';
+import AddBoxIcon from '@mui/icons-material/AddBox';
+
 import classes from './style.module.scss';
-import { useState } from 'react';
 
 const Department = () => {
   const [page, setPage] = useState(0);
@@ -44,21 +48,23 @@ const Department = () => {
   return (
     <div className={classes.container}>
       <div className={classes.wrapper}>
-        <TextField
-          size="small"
-          InputProps={{
-            endAdornment: (
-              <InputAdornment>
-                <IconButton>
-                  <SearchIcon />
-                </IconButton>
-              </InputAdornment>
-            ),
-          }}
-          sx={{ width: '30%', margin: '1rem 0rem' }}
-          onChange={(e) => setSearchedVal(e.target.value)}
-        />
-
+        <div className={classes.feat}>
+          <Button startIcon={<AddBoxIcon/>} variant="contained">Tambah</Button>
+          <TextField
+            size="small"
+            InputProps={{
+              endAdornment: (
+                <InputAdornment>
+                  <IconButton>
+                    <SearchIcon />
+                  </IconButton>
+                </InputAdornment>
+              ),
+            }}
+            sx={{ width: '30%' }}
+            onChange={(e) => setSearchedVal(e.target.value)}
+          />
+        </div>
         <Paper sx={{ width: '100%', overflow: 'hidden' }}>
           <TableContainer sx={{ maxHeight: 440 }}>
             <Table stickyHeader aria-label="sticky table">
