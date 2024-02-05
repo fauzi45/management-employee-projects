@@ -56,7 +56,7 @@ const Project = () => {
   return (
     <div className={classes.container}>
       <div className={classes.wrapper}>
-        <Typography variant="h4" mt={5} gutterBottom>
+        <Typography fontWeight={700} variant="h4" mt={5} gutterBottom>
           <FormattedMessage id="app_text_project" />
         </Typography>
         <div className={classes.feat}>
@@ -116,7 +116,7 @@ const Project = () => {
                 {rows.length === 0 && searchedVal.length > 0 && (
                   <TableRow>
                     <TableCell align="center" colSpan={columns.length}>
-                      No data found
+                      <FormattedMessage id="app_no_data" />
                     </TableCell>
                   </TableRow>
                 )}
@@ -128,7 +128,7 @@ const Project = () => {
                   ).length === 0 && (
                     <TableRow>
                       <TableCell align="center" colSpan={columns.length}>
-                        No matching data found
+                        <FormattedMessage id="app_no_data_filter" />
                       </TableCell>
                     </TableRow>
                   )}
