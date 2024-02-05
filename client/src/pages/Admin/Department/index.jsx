@@ -1,6 +1,8 @@
 import * as React from 'react';
 import { useState } from 'react';
 
+import { FormattedMessage, useIntl } from 'react-intl';
+
 import Paper from '@mui/material/Paper';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
@@ -15,10 +17,15 @@ import IconButton from '@mui/material/IconButton';
 import SearchIcon from '@mui/icons-material/Search';
 import Button from '@mui/material/Button';
 import AddBoxIcon from '@mui/icons-material/AddBox';
+import DeleteIcon from '@mui/icons-material/Delete';
+import EditIcon from '@mui/icons-material/Edit';
+import Typography from '@mui/material/Typography';
 
 import classes from './style.module.scss';
 
 const Department = () => {
+  const intl = useIntl();
+
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(10);
   const [searchedVal, setSearchedVal] = useState('');
@@ -34,10 +41,31 @@ const Department = () => {
 
   const columns = [
     { id: 'no', label: 'No.', minWidth: 10 },
-    { id: 'name', label: 'Name' },
+    { id: 'name', label: <FormattedMessage id="app_table_name" /> },
+    { id: 'action', label: <FormattedMessage id="app_table_action" /> },
   ];
 
   const rows = [
+    { id: 1, name: 'Human Resources' },
+    { id: 2, name: 'Finance' },
+    { id: 3, name: 'Marketing' },
+    { id: 4, name: 'Information Technology' },
+    { id: 5, name: 'Operations' },
+    { id: 6, name: 'Human Resources' },
+    { id: 7, name: 'Finance' },
+    { id: 8, name: 'Marketing' },
+    { id: 9, name: 'Information Technology' },
+    { id: 10, name: 'Operations' },
+    { id: 1, name: 'Human Resources' },
+    { id: 2, name: 'Finance' },
+    { id: 3, name: 'Marketing' },
+    { id: 4, name: 'Information Technology' },
+    { id: 5, name: 'Operations' },
+    { id: 1, name: 'Human Resources' },
+    { id: 2, name: 'Finance' },
+    { id: 3, name: 'Marketing' },
+    { id: 4, name: 'Information Technology' },
+    { id: 5, name: 'Operations' },
     { id: 1, name: 'Human Resources' },
     { id: 2, name: 'Finance' },
     { id: 3, name: 'Marketing' },
@@ -48,8 +76,13 @@ const Department = () => {
   return (
     <div className={classes.container}>
       <div className={classes.wrapper}>
+        <Typography variant="h4" mt={5} gutterBottom>
+          <FormattedMessage id="app_text_department" />
+        </Typography>
         <div className={classes.feat}>
-          <Button startIcon={<AddBoxIcon/>} variant="contained">Tambah</Button>
+          <Button startIcon={<AddBoxIcon />} variant="contained">
+            <FormattedMessage id="app_button_add" />
+          </Button>
           <TextField
             size="small"
             InputProps={{
@@ -61,12 +94,13 @@ const Department = () => {
                 </InputAdornment>
               ),
             }}
+            placeholder={intl.formatMessage({ id: 'app_placeholder_search' })}
             sx={{ width: '30%' }}
             onChange={(e) => setSearchedVal(e.target.value)}
           />
         </div>
-        <Paper sx={{ width: '100%', overflow: 'hidden' }}>
-          <TableContainer sx={{ maxHeight: 440 }}>
+        <Paper sx={{ width: '100%', overflow: 'hidden', mb: 5 }}>
+          <TableContainer className={classes.content} sx={{ maxHeight: 440 }}>
             <Table stickyHeader aria-label="sticky table">
               <TableHead>
                 <TableRow>
@@ -87,8 +121,16 @@ const Department = () => {
                   )
                   .map((row, index) => (
                     <TableRow hover role="checkbox" tabIndex={-1} key={row.id}>
-                      <TableCell align="center">{index + 1}</TableCell>
+                      <TableCell align="center">{page * rowsPerPage + index + 1}</TableCell>
                       <TableCell align="center">{row.name}</TableCell>
+                      <TableCell align="center">
+                        <IconButton aria-label="delete">
+                          <DeleteIcon />
+                        </IconButton>
+                        <IconButton aria-label="update">
+                          <EditIcon />
+                        </IconButton>
+                      </TableCell>
                     </TableRow>
                   ))}
                 {rows.length === 0 && searchedVal.length > 0 && (
