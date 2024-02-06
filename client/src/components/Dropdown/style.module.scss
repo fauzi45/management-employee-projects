@@ -1,0 +1,48 @@
+@import '../../styles/base.scss';
+
+.dropdownProfile {
+  position: absolute;
+  top: 3.5rem;
+  right: 2rem;
+  list-style-type: none;
+  width: 170px;
+  padding: 15px;
+  gap: 15px;
+  color: black;
+  box-shadow: 0px 0px 15px 0px rgba(82, 82, 82, 0.18);
+  border-radius: 10px;
+  justify-content: center;
+  align-self: center;
+  background-color: white;
+  @include directionY;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  -ms-border-radius: 10px;
+  -o-border-radius: 10px;
+  .baris {
+    cursor: pointer;
+    @include directionX;
+    font-size: 18px;
+    gap: 10px;
+    color: #000;
+    font-family: "Poppins", sans-serif;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+  }
+}
+
+.dropdownProfile::before {
+  content: '';
+  position: absolute;
+  top: -0.5rem;
+  right: 1.5rem;
+  width: 20px;
+  height: 20px;
+  background-color: white;
+  transform: rotate(45deg);
+  -webkit-transform: rotate(45deg);
+  -moz-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  -o-transform: rotate(45deg);
+}
