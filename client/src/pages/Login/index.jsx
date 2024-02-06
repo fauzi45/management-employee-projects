@@ -6,10 +6,14 @@ import { createStructuredSelector } from 'reselect';
 import classes from './style.module.scss';
 import { useNavigate } from 'react-router-dom';
 
+import encryptPayload from '@utils/encryptionHelper';
 import toast, { Toaster } from 'react-hot-toast';
+
 import { Icon } from 'react-icons-kit';
 import { eyeOff } from 'react-icons-kit/feather/eyeOff';
 import { eye } from 'react-icons-kit/feather/eye';
+import { doLoginAction } from './actions';
+import { selectToken } from './selectors';
 
 const Login = ({ token }) => {
   const [type, setType] = useState('password');
@@ -43,11 +47,11 @@ const Login = ({ token }) => {
     }
   };
 
-  //   useEffect(() => {
-  //     if (token) {
-  //       navigate('/');
-  //     }
-  //   }, [token]);
+    useEffect(() => {
+      if (token) {
+        navigate('/employee');
+      }
+    }, [token]);
 
   const isValidEmail = (email) => {
     // Basic email validation using regex
@@ -58,6 +62,7 @@ const Login = ({ token }) => {
   return (
     <div className={classes.container}>
       <div className={classes.image}></div>
+      {console.log(token)}
       <div className={classes.box}>
         <div className={classes.containerbox}>
           <div className={classes.title}>
@@ -93,7 +98,7 @@ Login.prototypes = {
 };
 
 const mapStateToProps = createStructuredSelector({
-  token: (state) => state.client.token,
+  token: selectToken
 });
 
 export default connect(mapStateToProps)(Login);
