@@ -6,8 +6,8 @@ const app = express();
 const Port = process.env.NODEJS_PORT || 8080;
 
 // Import routes
-const Auth = require('./server/api/auth');
-const Blog = require('./server/api/blog');
+const Auths = require('./server/api/auth');
+const Department = require('./server/api/departments');
 
 dotenv.config();
 
@@ -70,8 +70,8 @@ app.use((req, res, next) => {
 });
 
 // Route middlewares
-app.use('/', Auth);
-app.use('/blog', Blog);
+app.use('/api/auth', Auths);
+app.use('/api/department', Department);
 
 // Sys ping api 
 app.get('/sys/ping', (req, res) => {
