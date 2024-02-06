@@ -10,6 +10,8 @@ export default {
 
   app_text_login: 'Masuk',
   app_text_password: 'Kata Sandi',
+  app_text_register: 'Daftar',
+  app_text_confirm_password: 'Konfirmasi Kata Sandi',
 
   app_table_name: 'Nama',
   app_table_action: 'Aksi',

@@ -10,6 +10,8 @@ export default {
 
   app_text_login: 'Login',
   app_text_password: 'Password',
+  app_text_register: 'Register',
+  app_text_confirm_password: 'Password Confirmation',
 
   app_table_name: 'Name',
   app_table_action: 'Action',
