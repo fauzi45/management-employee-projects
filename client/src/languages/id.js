@@ -14,6 +14,10 @@ export default {
   app_table_name: 'Nama',
   app_table_action: 'Aksi',
   app_table_position: 'Posisi',
+  app_table_team_name: 'Nama Tim',
+  app_table_employee_name: 'Nama Pegawai',
+  app_table_department_name: 'Nama Departemen',
+  app_table_role: 'Peran',
 
 
   app_button_add: 'Tambah',
@@ -24,4 +28,5 @@ export default {
   app_text_department: 'Departemen',
   app_text_project: 'Projek',
   app_text_employee: 'Pegawai',
+  app_text_team_project: 'Projek Tim',
 };
