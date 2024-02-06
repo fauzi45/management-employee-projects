@@ -16,8 +16,10 @@ const registerValidation = (data) => {
   const schema = Joi.object({
     name: Joi.string().required().description('Person\'s full name'),
     email: Joi.string().required().description('Active email'),
-    password: Joi.string().min(8).max(20).required().description('Should be between 8-20 characters'),
-    confirmPassword: Joi.string().min(8).max(20).required().valid(Joi.ref('password')).description('Should match password')
+    password: Joi.string().min(6).max(20).required().description('Should be between 8-20 characters'),
+    confirmPassword: Joi.string().min(6).max(20).required().valid(Joi.ref('password')).description('Should match password'),
+    position: Joi.string().required().description('Position need to be fill it'),
+    departmentId: Joi.number().required(),
   });
 
   if (schema.validate(data).error) {
