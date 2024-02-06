@@ -7,6 +7,7 @@ import Project from '@pages/Admin/Project';
 import Home from '@pages/Home';
 import Login from '@pages/Login';
 import NotFound from '@pages/NotFound';
+import Register from '@pages/Register';
 
 const routes = [
   {
@@ -49,6 +50,12 @@ const routes = [
     name: 'Login',
     protected: false,
     component: Login,
+  },
+  {
+    path: '/register',
+    name: 'Register',
+    protected: false,
+    component: Register,
   },
   { path: '*', name: 'Not Found', component: NotFound, layout: MainLayout, protected: false },
 ];
