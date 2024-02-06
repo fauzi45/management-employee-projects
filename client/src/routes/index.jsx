@@ -1,7 +1,7 @@
 import MainLayout from '@layouts/MainLayout';
 import Department from '@pages/Admin/Department';
 import Employee from '@pages/Admin/Employee';
-import EmployeeProject from '@pages/Admin/EmployeeProject';
+import EmployeeProject from '@pages/Admin/TeamProject';
 import Project from '@pages/Admin/Project';
 
 import Home from '@pages/Home';
@@ -38,8 +38,8 @@ const routes = [
     layout: MainLayout,
   },
   {
-    path: '/admin/employee-project',
-    name: 'EmployeProject',
+    path: '/admin/team-project',
+    name: 'TeamProject',
     protected: false,
     component: EmployeeProject,
     layout: MainLayout,

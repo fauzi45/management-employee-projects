@@ -23,7 +23,7 @@ import Typography from '@mui/material/Typography';
 
 import classes from './style.module.scss';
 
-const EmployeeProject = () => {
+const TeamProject = () => {
   const intl = useIntl();
 
   const [page, setPage] = useState(0);
@@ -41,44 +41,27 @@ const EmployeeProject = () => {
 
   const columns = [
     { id: 'no', label: 'No.', minWidth: 10 },
-    { id: 'name', label: <FormattedMessage id="app_table_name" /> },
-    { id: 'email', label: 'Email' },
-    { id: 'position', label: <FormattedMessage id="app_table_position" /> },
-    { id: 'department', label: <FormattedMessage id="app_text_department" /> },
+    { id: 'name', label: <FormattedMessage id="app_table_team_name" /> },
+    { id: 'position', label: <FormattedMessage id="app_table_employee_name" /> },
+    { id: 'department', label: <FormattedMessage id="app_table_department_name" /> },
+    { id: 'role', label: <FormattedMessage id="app_table_role" /> },
     { id: 'action', label: <FormattedMessage id="app_table_action" /> },
   ];
 
   const rows = [
     {
-      id: 1,
+      team_name: 'Engineering Team',
       name: 'John Doe',
-      position: 'Software Engineer',
       department: 'Engineering',
-      email: 'john.doe@example.com',
+      role: 'Software Engineer',
     },
-    { id: 2, name: 'Jane Smith', position: 'Data Scientist', department: 'Research', email: 'jane.smith@example.com' },
-    {
-      id: 3,
-      name: 'Michael Johnson',
-      position: 'Product Manager',
-      department: 'Product Management',
-      email: 'michael.johnson@example.com',
-    },
-    {
-      id: 4,
-      name: 'Emily Brown',
-      position: 'Marketing Specialist',
-      department: 'Marketing',
-      email: 'emily.brown@example.com',
-    },
-    { id: 5, name: 'David Lee', position: 'Financial Analyst', department: 'Finance', email: 'david.lee@example.com' },
   ];
 
   return (
     <div className={classes.container}>
       <div className={classes.wrapper}>
         <Typography fontWeight={700} variant="h4" mt={5} gutterBottom>
-          <FormattedMessage id="app_text_employee" />
+          <FormattedMessage id="app_text_team_project" />
         </Typography>
         <div className={classes.feat}>
           <Button startIcon={<AddBoxIcon />} variant="contained">
@@ -123,10 +106,10 @@ const EmployeeProject = () => {
                   .map((row, index) => (
                     <TableRow hover role="checkbox" tabIndex={-1} key={row.id}>
                       <TableCell align="center">{page * rowsPerPage + index + 1}</TableCell>
+                      <TableCell align="center">{row.team_name}</TableCell>
                       <TableCell align="center">{row.name}</TableCell>
-                      <TableCell align="center">{row.email}</TableCell>
-                      <TableCell align="center">{row.position}</TableCell>
                       <TableCell align="center">{row.department}</TableCell>
+                      <TableCell align="center">{row.role}</TableCell>
                       <TableCell align="center">
                         <IconButton aria-label="delete">
                           <DeleteIcon />
@@ -174,4 +157,4 @@ const EmployeeProject = () => {
   );
 };
 
-export default EmployeeProject;
+export default TeamProject;
