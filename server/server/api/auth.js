@@ -39,10 +39,17 @@ const register = async (request, reply) => {
 
 const login = async (request, reply) => {
   try {
-    Validation.loginValidation(request.body);
-
     const { email, password } = request.body;
-    const response = await AuthHelper.login({ email, password });
+    const decryptEmail = decryptData(email);
+    const decryptPassword = decryptData(password);
+    Validation.loginValidation({
+      email: decryptEmail,
+      password: decryptPassword,
+    });
+    const response = await AuthHelper.login({
+      email: decryptEmail,
+      password: decryptPassword,
+    });
 
     return reply.send(response);
   } catch (err) {

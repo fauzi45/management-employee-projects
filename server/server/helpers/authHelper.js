@@ -66,21 +66,21 @@ const login = async (dataObject) => {
   const { email, password } = dataObject;
 
   try {
-    const user = await db.User.findOne({
+    const employee = await db.Employees.findOne({
       where: { email },
     });
-    if (_.isEmpty(user)) {
+    if (_.isEmpty(employee)) {
       return Promise.reject(Boom.notFound("USER_NOT_FOUND"));
     }
 
-    const isPassMatched = __comparePassword(password, user.password);
+    const isPassMatched = __comparePassword(password, employee.password);
     if (!isPassMatched) {
       return Promise.reject(Boom.badRequest("WRONG_CREDENTIALS"));
     }
 
     const token = __generateToken({
-      name: user.name,
-      password: user.password,
+      employeeId: employee.id, 
+      role: employee.isAdmin
     });
 
     return Promise.resolve({ token });

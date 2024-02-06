@@ -37,7 +37,6 @@ const loginValidation = (data) => {
   const schema = Joi.object({
     email: Joi.string().required().description("Active email"),
     password: Joi.string()
-      .min(8)
       .max(20)
       .required()
       .description("Should be between 8-20 characters"),
