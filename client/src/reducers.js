@@ -6,11 +6,13 @@ import languageReducer from '@containers/Language/reducer';
 
 import { mapWithPersistor } from './persistence';
 import registerReducer, { storedKey as storedEmployee } from '@pages/Register/reducer';
+import loginReducer, { storedKey as storedEmployeeLogin } from '@pages/Login/reducer';
 
 const storedReducers = {
   app: { reducer: appReducer, whitelist: storedAppState },
   client: { reducer: clientReducer, whitelist: storedClientState },
-  register: {reducer: registerReducer, whitelist: storedEmployee}
+  register: {reducer: registerReducer, whitelist: storedEmployee},
+  login: {reducer: loginReducer, whitelist: storedEmployeeLogin},
 };
 
 const temporaryReducers = {
