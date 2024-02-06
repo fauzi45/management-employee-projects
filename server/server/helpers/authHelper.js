@@ -5,6 +5,7 @@ const jwt = require("jsonwebtoken");
 
 const db = require("../../models");
 const GeneralHelper = require("./generalHelper");
+const {decryptData} = require("../../utils/decryptionHelper");
 
 const jwtSecretToken = process.env.JWT_SECRET_TOKEN || "super_strong_key";
 const jwtExpiresIn = process.env.JWT_EXPIRES_IN || "24h";
@@ -52,8 +53,8 @@ const registerUser = async (dataObject) => {
       password: hashedPass,
       position,
       departmentId,
+      isAdmin: false
     });
-
     return Promise.resolve(true);
   } catch (err) {
     console.log([fileName, "registerUser", "ERROR"], { info: `${err}` });

@@ -4,22 +4,32 @@ const Middleware = require("../middlewares/authMiddleware");
 const Validation = require("../helpers/validationHelper");
 const AuthHelper = require("../helpers/authHelper");
 const GeneralHelper = require("../helpers/generalHelper");
-
+const { decryptData } = require("../../utils/decryptionHelper");
 const fileName = "server/api/auth.js";
 
 const register = async (request, reply) => {
   try {
-    Validation.registerValidation(request.body);
-
     const { name, email, password, position, departmentId } = request.body;
-    const response = await AuthHelper.registerUser({
-      name,
-      email,
-      password,
-      position,
-      departmentId,
+    const decryptName = decryptData(name);
+    const decryptEmail = decryptData(email);
+    const decryptPassword = decryptData(password);
+    const decryptPosition = decryptData(position);
+    const decryptDeparmentId = decryptData(departmentId);
+    Validation.registerValidation({
+      name: decryptName,
+      email: decryptEmail,
+      password: decryptPassword,
+      position: decryptPosition,
+      departmentId: decryptDeparmentId,
     });
 
+    const response = await AuthHelper.registerUser({
+      name: decryptName,
+      email: decryptEmail,
+      password: decryptPassword,
+      position: decryptPosition,
+      departmentId: decryptDeparmentId,
+    });
     return reply.send(response);
   } catch (err) {
     console.log([fileName, "register", "ERROR"], { info: `${err}` });
@@ -45,7 +55,6 @@ const login = async (request, reply) => {
 const hello = async (request, reply) => {
   return reply.send("HELLO");
 };
-
 
 Router.post("/register", register);
 Router.post("/login", login);
