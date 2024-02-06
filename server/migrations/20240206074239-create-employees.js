@@ -24,6 +24,9 @@ module.exports = {
       departmentId: {
         type: Sequelize.INTEGER
       },
+      isAdmin: {
+        type: Sequelize.BOOLEAN
+      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE
