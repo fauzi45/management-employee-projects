@@ -80,6 +80,10 @@ const Department = ({ department, token }) => {
     );
   };
 
+  const handleUpdate = (id) => {
+    navigate(`/admin/department/form/${id}`)
+  };
+
   const columns = [
     { id: 'no', label: 'No.', minWidth: 10 },
     { id: 'name', label: <FormattedMessage id="app_table_name" /> },
@@ -93,7 +97,7 @@ const Department = ({ department, token }) => {
           <FormattedMessage id="app_text_department" />
         </Typography>
         <div className={classes.feat}>
-          <Button startIcon={<AddBoxIcon />} onClick={() => navigate("/admin/department/create")} variant="contained">
+          <Button startIcon={<AddBoxIcon />} onClick={() => navigate("/admin/department/form")} variant="contained">
             <FormattedMessage id="app_button_add" />
           </Button>
           <TextField
@@ -142,7 +146,7 @@ const Department = ({ department, token }) => {
                         <IconButton aria-label="delete" onClick={() => handleDelete(row.id)}>
                           <DeleteIcon />
                         </IconButton>
-                        <IconButton aria-label="update">
+                        <IconButton aria-label="update" onClick={() => handleUpdate(row.id)}>
                           <EditIcon />
                         </IconButton>
                       </TableCell>
