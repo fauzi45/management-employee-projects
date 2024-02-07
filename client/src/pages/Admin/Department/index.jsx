@@ -1,5 +1,8 @@
 import * as React from 'react';
+import { connect, useDispatch } from 'react-redux';
 import { useState } from 'react';
+
+import PropTypes from 'prop-types';
 
 import { FormattedMessage, useIntl } from 'react-intl';
 
@@ -23,12 +26,36 @@ import Typography from '@mui/material/Typography';
 
 import classes from './style.module.scss';
 
-const Department = () => {
+import { createStructuredSelector } from 'reselect';
+import { selectToken } from '@pages/Login/selectors';
+import { selectDepartment } from './selector';
+import { getFetchDepartment } from './actions';
+import { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+
+const Department = ({ department,token }) => {
   const intl = useIntl();
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const [data, setData] = useState([]);
 
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(10);
   const [searchedVal, setSearchedVal] = useState('');
+
+  useEffect(() => {
+    dispatch(getFetchDepartment());
+  }, [dispatch]);
+
+  useEffect(() => {
+    setData(department.response);
+  }, [department]);
+
+  useEffect(() => {
+    if (!token) {
+      navigate('/login');
+    }
+  }, [token]);
 
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
@@ -43,34 +70,6 @@ const Department = () => {
     { id: 'no', label: 'No.', minWidth: 10 },
     { id: 'name', label: <FormattedMessage id="app_table_name" /> },
     { id: 'action', label: <FormattedMessage id="app_table_action" /> },
-  ];
-
-  const rows = [
-    { id: 1, name: 'Human Resources' },
-    { id: 2, name: 'Finance' },
-    { id: 3, name: 'Marketing' },
-    { id: 4, name: 'Information Technology' },
-    { id: 5, name: 'Operations' },
-    { id: 6, name: 'Human Resources' },
-    { id: 7, name: 'Finance' },
-    { id: 8, name: 'Marketing' },
-    { id: 9, name: 'Information Technology' },
-    { id: 10, name: 'Operations' },
-    { id: 1, name: 'Human Resources' },
-    { id: 2, name: 'Finance' },
-    { id: 3, name: 'Marketing' },
-    { id: 4, name: 'Information Technology' },
-    { id: 5, name: 'Operations' },
-    { id: 1, name: 'Human Resources' },
-    { id: 2, name: 'Finance' },
-    { id: 3, name: 'Marketing' },
-    { id: 4, name: 'Information Technology' },
-    { id: 5, name: 'Operations' },
-    { id: 1, name: 'Human Resources' },
-    { id: 2, name: 'Finance' },
-    { id: 3, name: 'Marketing' },
-    { id: 4, name: 'Information Technology' },
-    { id: 5, name: 'Operations' },
   ];
 
   return (
@@ -112,7 +111,7 @@ const Department = () => {
                 </TableRow>
               </TableHead>
               <TableBody>
-                {rows
+                {data
                   .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                   .filter(
                     (row) =>
@@ -133,15 +132,15 @@ const Department = () => {
                       </TableCell>
                     </TableRow>
                   ))}
-                {rows.length === 0 && searchedVal.length > 0 && (
+                {data.length === 0 && searchedVal.length > 0 && (
                   <TableRow>
                     <TableCell align="center" colSpan={columns.length}>
                       <FormattedMessage id="app_no_data" />
                     </TableCell>
                   </TableRow>
                 )}
-                {rows.length > 0 &&
-                  rows.filter(
+                {data.length > 0 &&
+                  data.filter(
                     (row) =>
                       !searchedVal.length ||
                       row.name.toString().toLowerCase().includes(searchedVal.toString().toLowerCase())
@@ -158,7 +157,7 @@ const Department = () => {
           <TablePagination
             rowsPerPageOptions={[10, 25, 100]}
             component="div"
-            count={rows.length}
+            count={data.length}
             rowsPerPage={rowsPerPage}
             page={page}
             onPageChange={handleChangePage}
@@ -170,4 +169,13 @@ const Department = () => {
   );
 };
 
-export default Department;
+Department.propTypes = {
+  department: PropTypes.object,
+  token: PropTypes.string,
+};
+const mapStateToProps = createStructuredSelector({
+  department: selectDepartment,
+  token: selectToken,
+});
+
+export default connect(mapStateToProps)(Department);
