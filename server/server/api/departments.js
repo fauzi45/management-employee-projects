@@ -10,9 +10,9 @@ const listDepartment = async (req, res) => {
   try {
     const response = await DepartmentHelper.getDepartmentListHelper();
     return res.send({
-        message: "Department data received successfully",
-        response,
-      });
+      message: "Department data received successfully",
+      response,
+    });
   } catch (err) {
     console.log([fileName, "listDepartment", "ERROR"], { info: `${err}` });
     return res.send(GeneralHelper.errorResponse(err));
@@ -30,7 +30,22 @@ const createDepartment = async (req, res) => {
   }
 };
 
+const deleteDepartment = async (req, res) => {
+  try {
+    const { id } = req.query;
+    const response = await DepartmentHelper.deleteDepartmentHelper(id);
+    return res.status(200).send({
+      message: "Department data successfully deleted",
+      response,
+    });
+  } catch (err) {
+    console.log([fileName, "deleteDepartment", "ERROR"], { info: `${err}` });
+    return res.send(GeneralHelper.errorResponse(err));
+  }
+};
+
 Router.get("/departmentList", listDepartment);
 Router.post("/create", createDepartment);
+Router.delete("/delete", deleteDepartment);
 
 module.exports = Router;
