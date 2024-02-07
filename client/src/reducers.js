@@ -8,13 +8,15 @@ import { mapWithPersistor } from './persistence';
 import registerReducer, { storedKey as storedEmployee } from '@pages/Register/reducer';
 import loginReducer, { storedKey as storedEmployeeLogin } from '@pages/Login/reducer';
 import departmentReducer, { storedKey as storedDepartment } from '@pages/Admin/Department/reducer';
+import createNewDepartment,{ storedKey as storedNewDepartment} from '@pages/Admin/Department/components/FormDepartment/reducer';
 
 const storedReducers = {
   app: { reducer: appReducer, whitelist: storedAppState },
   client: { reducer: clientReducer, whitelist: storedClientState },
   register: {reducer: registerReducer, whitelist: storedEmployee},
   login: {reducer: loginReducer, whitelist: storedEmployeeLogin},
-  department: {reducer: departmentReducer, whitelist: storedDepartment}
+  department: {reducer: departmentReducer, whitelist: storedDepartment},
+  newDepartment: {reducer: createNewDepartment, whitelist: storedNewDepartment}
 };
 
 const temporaryReducers = {
