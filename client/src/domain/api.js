@@ -7,6 +7,8 @@ const urls = {
   ping: 'ping.json',
   register: 'auth/register',
   login: 'auth/login',
+
+  allDepartment: 'department/departmentList'
 };
 
 export const callAPI = async (endpoint, method, header = {}, params = {}, data = {}) => {
@@ -37,3 +39,5 @@ export const register = (dataEmployee) => {
 export const login = (login) => {
   return callAPI(urls.login, 'POST', {}, {}, login);
 };
+
+export const fetchDepartment = () => callAPI(urls.allDepartment, 'GET');
