@@ -64,9 +64,6 @@ const Navbar = ({ title, locale, theme, token }) => {
             <div className={classes.lang}>{locale}</div>
             <ExpandMoreIcon />
           </div>
-          <div>
-            halo, 
-          </div>
           {token ? (
             <div>
               <Avatar className={classes.avatar} onClick={() => setOpenProfile(!openProfile)} />
