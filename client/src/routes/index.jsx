@@ -8,6 +8,7 @@ import Home from '@pages/Home';
 import Login from '@pages/Login';
 import NotFound from '@pages/NotFound';
 import Register from '@pages/Register';
+import CreateDepartment from '@pages/Admin/Department/components/FormDepartment';
 
 const routes = [
   {
@@ -22,6 +23,13 @@ const routes = [
     name: 'Employee',
     protected: false,
     component: Employee,
+    layout: MainLayout,
+  },
+  {
+    path: '/admin/department/create',
+    name: 'Department',
+    protected: false,
+    component: CreateDepartment,
     layout: MainLayout,
   },
   {
