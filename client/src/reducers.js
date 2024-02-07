@@ -16,7 +16,7 @@ const storedReducers = {
   register: {reducer: registerReducer, whitelist: storedEmployee},
   login: {reducer: loginReducer, whitelist: storedEmployeeLogin},
   department: {reducer: departmentReducer, whitelist: storedDepartment},
-  newDepartment: {reducer: createNewDepartment, whitelist: storedNewDepartment}
+  newDepartment: {reducer: createNewDepartment, whitelist: storedNewDepartment},
 };
 
 const temporaryReducers = {
