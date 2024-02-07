@@ -26,8 +26,15 @@ const routes = [
     layout: MainLayout,
   },
   {
-    path: '/admin/department/create',
-    name: 'Department',
+    path: '/admin/department/form',
+    name: 'Form Department',
+    protected: false,
+    component: CreateDepartment,
+    layout: MainLayout,
+  },
+  {
+    path: '/admin/department/form/:id',
+    name: 'Form Department',
     protected: false,
     component: CreateDepartment,
     layout: MainLayout,
