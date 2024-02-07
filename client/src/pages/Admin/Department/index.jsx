@@ -86,7 +86,7 @@ const Department = ({ department,token }) => {
             size="small"
             InputProps={{
               endAdornment: (
-                <InputAdornment>
+                <InputAdornment position='end'>
                   <IconButton>
                     <SearchIcon />
                   </IconButton>
