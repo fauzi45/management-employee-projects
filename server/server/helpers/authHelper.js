@@ -79,7 +79,7 @@ const login = async (dataObject) => {
 
     const token = __generateToken({
       employeeId: employee.id, 
-      role: employee.isAdmin
+      isAdmin: employee.isAdmin
     });
 
     return Promise.resolve({ token });

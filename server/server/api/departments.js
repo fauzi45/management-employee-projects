@@ -32,7 +32,8 @@ const createDepartment = async (req, res) => {
 
 const deleteDepartment = async (req, res) => {
   try {
-    const { id } = req.query;
+    const { id } = req.params;
+    console.log(id)
     const response = await DepartmentHelper.deleteDepartmentHelper(id);
     return res.status(200).send({
       message: "Department data successfully deleted",
@@ -46,6 +47,6 @@ const deleteDepartment = async (req, res) => {
 
 Router.get("/departmentList", listDepartment);
 Router.post("/create", createDepartment);
-Router.delete("/delete", deleteDepartment);
+Router.delete("/delete/:id", deleteDepartment);
 
 module.exports = Router;
