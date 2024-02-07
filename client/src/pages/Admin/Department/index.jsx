@@ -29,19 +29,23 @@ import classes from './style.module.scss';
 import { createStructuredSelector } from 'reselect';
 import { selectToken } from '@pages/Login/selectors';
 import { selectDepartment } from './selector';
-import { getFetchDepartment } from './actions';
+import { deleteDepartment, getFetchDepartment } from './actions';
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-const Department = ({ department,token }) => {
+import { jwtDecode } from 'jwt-decode';
+import toast, { Toaster } from 'react-hot-toast';
+
+const Department = ({ department, token }) => {
   const intl = useIntl();
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [data, setData] = useState([]);
-
+  const decoded = jwtDecode(token);
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(10);
   const [searchedVal, setSearchedVal] = useState('');
+  
 
   useEffect(() => {
     dispatch(getFetchDepartment());
@@ -66,6 +70,16 @@ const Department = ({ department,token }) => {
     setPage(0);
   };
 
+  const handleDelete = (id) => {
+    dispatch(
+      deleteDepartment(
+        String(id),
+        () => dispatch(getFetchDepartment()),
+        toast.success('Department Successfully deleted')
+      )
+    );
+  };
+
   const columns = [
     { id: 'no', label: 'No.', minWidth: 10 },
     { id: 'name', label: <FormattedMessage id="app_table_name" /> },
@@ -79,14 +93,14 @@ const Department = ({ department,token }) => {
           <FormattedMessage id="app_text_department" />
         </Typography>
         <div className={classes.feat}>
-          <Button startIcon={<AddBoxIcon />} variant="contained">
+          <Button startIcon={<AddBoxIcon />} onClick={() => navigate("/admin/department/create")} variant="contained">
             <FormattedMessage id="app_button_add" />
           </Button>
           <TextField
             size="small"
             InputProps={{
               endAdornment: (
-                <InputAdornment position='end'>
+                <InputAdornment position="end">
                   <IconButton>
                     <SearchIcon />
                   </IconButton>
@@ -98,6 +112,8 @@ const Department = ({ department,token }) => {
             onChange={(e) => setSearchedVal(e.target.value)}
           />
         </div>
+        {console.log(data)}
+
         <Paper sx={{ width: '100%', overflow: 'hidden', mb: 5 }}>
           <TableContainer className={classes.content} sx={{ maxHeight: 440 }}>
             <Table stickyHeader aria-label="sticky table">
@@ -123,7 +139,7 @@ const Department = ({ department,token }) => {
                       <TableCell align="center">{page * rowsPerPage + index + 1}</TableCell>
                       <TableCell align="center">{row.name}</TableCell>
                       <TableCell align="center">
-                        <IconButton aria-label="delete">
+                        <IconButton aria-label="delete" onClick={() => handleDelete(row.id)}>
                           <DeleteIcon />
                         </IconButton>
                         <IconButton aria-label="update">
@@ -132,7 +148,7 @@ const Department = ({ department,token }) => {
                       </TableCell>
                     </TableRow>
                   ))}
-                {data.length === 0 && searchedVal.length > 0 && (
+                {data.length === 0 && (
                   <TableRow>
                     <TableCell align="center" colSpan={columns.length}>
                       <FormattedMessage id="app_no_data" />
@@ -165,6 +181,7 @@ const Department = ({ department,token }) => {
           />
         </Paper>
       </div>
+      <Toaster />
     </div>
   );
 };
