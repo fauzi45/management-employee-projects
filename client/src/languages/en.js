@@ -20,14 +20,15 @@ export default {
   app_table_employee_name: 'Employee Name',
   app_table_department_name: 'Department Name',
   app_table_role: 'Role',
-  
 
   app_button_add: 'Add',
   app_placeholder_search: 'Search',
-  app_no_data: 'Data Not Found',
+  app_no_data: 'Data Empty',
   app_no_data_filter: 'No matching data found',
 
   app_text_department: 'Department',
+  app_text_department_create: 'Create Department',
+  app_text_name_placeholder: 'Name...',
   app_text_project: 'Project',
   app_text_employee: 'Employee',
   app_text_team_project: 'Team Project'

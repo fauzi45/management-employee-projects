@@ -24,10 +24,13 @@ export default {
 
   app_button_add: 'Tambah',
   app_placeholder_search: 'Cari',
-  app_no_data: 'Data tidak ditemukan',
+  app_no_data: 'Data Kosong',
   app_no_data_filter: 'Tidak ditemukan data yang cocok',
   
   app_text_department: 'Departemen',
+  app_text_department_create: 'Buat Departemen',
+  app_text_name_placeholder: 'Name...',
+  
   app_text_project: 'Projek',
   app_text_employee: 'Pegawai',
   app_text_team_project: 'Projek Tim',
