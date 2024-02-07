@@ -1,4 +1,23 @@
 const db = require("../../models");
+const _ = require("lodash");
+const GeneralHelper = require('./generalHelper');
+
+const fileName = 'server/helpers/DepartmentHelper.js';
+
+const getDepartmentListHelper = async () => {
+  try {
+    const checkDepartment = await db.Departments.findAll();
+    if (_.isEmpty(checkDepartment)) {
+      return Promise.reject(
+        Boom.badRequest("Department with this id is doesn't exist")
+      );
+    }
+    return Promise.resolve(checkDepartment);
+  } catch (err) {
+    console.log([fileName, "getDepartmentListHelper", "ERROR"], { info: `${err}` });
+    return Promise.reject(GeneralHelper.errorResponse(err));
+  }
+};
 
 const createDepartmentHelper = async (name) => {
   try {
@@ -6,11 +25,13 @@ const createDepartmentHelper = async (name) => {
       name: name,
     });
     return Promise.resolve(response);
-  } catch (error) {
-    throw error;
+  } catch (err) {
+    console.log([fileName, "createDepartmentHelper", "ERROR"], { info: `${err}` });
+    return Promise.reject(GeneralHelper.errorResponse(err));
   }
 };
 
 module.exports = {
+  getDepartmentListHelper,
   createDepartmentHelper,
 };
