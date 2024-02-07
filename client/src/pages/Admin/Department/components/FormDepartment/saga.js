@@ -1,7 +1,8 @@
-import { newDepartment } from "@domain/api";
-import { ADD_NEW_DEPARTMENT } from "./constants";
+import { detailDepartment, newDepartment } from "@domain/api";
+import { ADD_NEW_DEPARTMENT, GET_DETAIL_DEPARTMENT } from "./constants";
 import { takeLatest, call, put } from 'redux-saga/effects';
 import { setLoading } from "@containers/App/actions";
+import { setDetailDepartment } from "./actions";
 
 function* doNewDepartment({ data, cb }) {
     yield put(setLoading(true));
@@ -14,6 +15,19 @@ function* doNewDepartment({ data, cb }) {
     yield put(setLoading(false));
   }
   
+  function* doGetDetailDepartment({ id }) {
+    yield put(setLoading(true));
+    try {
+      const response = yield call(detailDepartment, id);
+      yield put(setDetailDepartment(response));
+      cb();
+    } catch (error) {
+      console.log(error);
+    }
+    yield put(setLoading(false));
+  }
+
   export default function* newDepartmentSaga() {
     yield takeLatest(ADD_NEW_DEPARTMENT, doNewDepartment);
+    yield takeLatest(GET_DETAIL_DEPARTMENT, doGetDetailDepartment);
   }

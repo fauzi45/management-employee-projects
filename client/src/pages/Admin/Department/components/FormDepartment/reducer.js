@@ -1,5 +1,5 @@
 import { produce } from 'immer';
-import { ADD_NEW_DEPARTMENT } from './constants';
+import { ADD_NEW_DEPARTMENT, SET_DETAIL_DEPARTMENT } from './constants';
 
 export const initialState = {
   data: {},
@@ -11,6 +11,9 @@ const createNewDepartment = (state = initialState, action) =>
   produce(state, (draft) => {
     switch (action.type) {
       case ADD_NEW_DEPARTMENT:
+        draft.data = action.data;
+        break;
+      case SET_DETAIL_DEPARTMENT:
         draft.data = action.data;
         break;
       default:
