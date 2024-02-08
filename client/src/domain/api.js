@@ -11,6 +11,7 @@ const urls = {
   allDepartment: 'department/departmentList',
   createDepartment: 'department/create',
   detailDepartment: 'department/detail',
+  updateDepartment: 'department/update',
   deleteDepartment: 'department/delete',
 };
 
@@ -46,4 +47,5 @@ export const login = (login) => {
 export const fetchDepartment = () => callAPI(urls.allDepartment, 'GET');
 export const newDepartment = (data) => callAPI(urls.createDepartment, 'POST', {}, {}, data);
 export const detailDepartment = (id) => callAPI(`${urls.detailDepartment}/${id}`, 'GET');
+export const updateDepartment = (id, data) => callAPI(`${urls.updateDepartment}/${id}`, 'PUT', {}, {}, data);
 export const deleteDepartment = (id) => callAPI(`${urls.deleteDepartment}/${id}`, 'DELETE');
