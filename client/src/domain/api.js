@@ -13,6 +13,10 @@ const urls = {
   detailDepartment: 'department/detail',
   updateDepartment: 'department/update',
   deleteDepartment: 'department/delete',
+
+  allProject: 'project/projectList',
+  createProject: 'project/create',
+  deleteProject: 'project/delete',
 };
 
 export const callAPI = async (endpoint, method, header = {}, params = {}, data = {}) => {
@@ -49,3 +53,7 @@ export const newDepartment = (data) => callAPI(urls.createDepartment, 'POST', {}
 export const detailDepartment = (id) => callAPI(`${urls.detailDepartment}/${id}`, 'GET');
 export const updateDepartment = (id, data) => callAPI(`${urls.updateDepartment}/${id}`, 'PUT', {}, {}, data);
 export const deleteDepartment = (id) => callAPI(`${urls.deleteDepartment}/${id}`, 'DELETE');
+
+export const fetchProject = () => callAPI(urls.allProject, 'GET');
+export const newProject = (data) => callAPI(urls.createProject, 'POST', {}, {}, data);
+export const deleteProject = (id) => callAPI(`${urls.deleteProject}/${id}`, 'DELETE');
