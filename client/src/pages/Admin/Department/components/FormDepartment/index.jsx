@@ -51,7 +51,6 @@ const FormDepartment = ({ departmentDetail }) => {
       toast.error('Name cannot be empty');
     } else {
       if (id) {
-        toast.success('Department Successfully Updated');
         dispatch(
           setUpdateDepartment(id,
             formDataSend, () => {
@@ -60,7 +59,6 @@ const FormDepartment = ({ departmentDetail }) => {
           )
         )
       } else {
-        toast.success('Department Successfully Created');
         dispatch(
           addNewDepartment(formDataSend, () => {
             navigate('/admin/department');

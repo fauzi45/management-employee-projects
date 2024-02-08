@@ -33,7 +33,6 @@ import { deleteDepartment, getFetchDepartment } from './actions';
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import { jwtDecode } from 'jwt-decode';
 import toast, { Toaster } from 'react-hot-toast';
 
 const Department = ({ department, token }) => {
@@ -74,7 +73,6 @@ const Department = ({ department, token }) => {
       deleteDepartment(
         String(id),
         () => dispatch(getFetchDepartment()),
-        toast.success('Department Successfully deleted')
       )
     );
   };

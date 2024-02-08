@@ -4,11 +4,14 @@ import { takeLatest, call, put } from 'redux-saga/effects';
 import { setLoading, showPopup } from '@containers/App/actions';
 import { setDetailDepartment } from './actions';
 
+import toast, { Toaster } from 'react-hot-toast';
+
 function* doNewDepartment({ data, cb }) {
   yield put(setLoading(true));
   try {
     yield call(newDepartment, data);
     cb();
+    toast.success('Department Successfully created');
   } catch (error) {
     yield put(showPopup(error.info));
   }
@@ -31,6 +34,7 @@ function* doUpdateDepartment({id, data, cb }) {
   try {
     yield call(updateDepartment,id, data);
     cb();
+    toast.success('Department Successfully updated');
   } catch (error) {
     yield put(showPopup(error.info));
   }

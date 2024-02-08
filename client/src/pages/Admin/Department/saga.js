@@ -5,6 +5,8 @@ import { deleteDepartment, fetchDepartment } from '@domain/api';
 import { setDepartment } from './actions';
 import { DELETE_DEPARTMENT, FETCH_DEPARTMENT } from './constants';
 
+import toast, { Toaster } from 'react-hot-toast';
+
 function* doFetchDepartment() {
   yield put(setLoading(true));
   try {
@@ -21,8 +23,9 @@ function* doRemoveDepartment({ id,cb }) {
   try {
     yield call(deleteDepartment, id);
     cb();
+    toast.success('Department Successfully deleted');
   } catch (error) {
-    console.log(error)
+    yield put(showPopup(error.info));
   }
   yield put(setLoading(false));
 }
