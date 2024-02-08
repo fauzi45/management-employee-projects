@@ -9,7 +9,7 @@ function* doFetchDepartment() {
   yield put(setLoading(true));
   try {
     const response = yield call(fetchDepartment);
-    yield put(setDepartment(response));
+    yield put(setDepartment(response.response));
   } catch (error) {
     yield put(showPopup(error.info));
   }

@@ -41,7 +41,6 @@ const Department = ({ department, token }) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [data, setData] = useState([]);
-  const decoded = jwtDecode(token);
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(10);
   const [searchedVal, setSearchedVal] = useState('');
@@ -52,7 +51,7 @@ const Department = ({ department, token }) => {
   }, [dispatch]);
 
   useEffect(() => {
-    setData(department.response);
+    setData(department);
   }, [department]);
 
   useEffect(() => {
@@ -116,7 +115,6 @@ const Department = ({ department, token }) => {
             onChange={(e) => setSearchedVal(e.target.value)}
           />
         </div>
-        {console.log(data)}
 
         <Paper sx={{ width: '100%', overflow: 'hidden', mb: 5 }}>
           <TableContainer className={classes.content} sx={{ maxHeight: 440 }}>
@@ -191,7 +189,7 @@ const Department = ({ department, token }) => {
 };
 
 Department.propTypes = {
-  department: PropTypes.object,
+  department: PropTypes.array,
   token: PropTypes.string,
 };
 const mapStateToProps = createStructuredSelector({
