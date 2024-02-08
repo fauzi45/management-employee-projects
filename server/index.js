@@ -4,7 +4,7 @@ const Boom = require('boom');
 const cors = require('cors');
 
 const app = express();
-const Port = process.env.NODEJS_PORT || 8080;
+const Port = process.env.NODEJS_PORT || 5000;
 
 // Import routes
 const Auths = require('./server/api/auth');
