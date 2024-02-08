@@ -7,8 +7,7 @@ import Button from '@mui/material/Button';
 
 import classes from './style.module.scss';
 
-import { addNewDepartment, getDetailDepartment } from './actions';
-import { selectDepartment } from '../../selector';
+import { addNewDepartment, getDetailDepartment, setDetailDepartment, setUpdateDepartment } from './actions';
 
 import toast, { Toaster } from 'react-hot-toast';
 
@@ -22,18 +21,26 @@ const FormDepartment = ({ departmentDetail }) => {
   const [formData, setFormData] = useState({
     name: '',
   });
-  console.log(formData);
 
   const dispatch = useDispatch();
+
   useEffect(() => {
     if (id) {
       dispatch(getDetailDepartment(id));
+    } else {
+      dispatch(setDetailDepartment(null));
+
     }
   }, [id]);
 
+
   useEffect(() => {
-    if (id) {
+    if (departmentDetail) {
       setFormData(departmentDetail);
+    } else {
+      setFormData({
+        name: '',
+      });
     }
   }, [departmentDetail]);
 
@@ -43,12 +50,23 @@ const FormDepartment = ({ departmentDetail }) => {
     if (!formData.name) {
       toast.error('Name cannot be empty');
     } else {
-      toast.success('Department Successfully Created');
-      dispatch(
-        addNewDepartment(formDataSend, () => {
-          navigate('/admin/department');
-        })
-      );
+      if (id) {
+        toast.success('Department Successfully Updated');
+        dispatch(
+          setUpdateDepartment(id,
+            formDataSend, () => {
+              navigate('/admin/department');
+            }
+          )
+        )
+      } else {
+        toast.success('Department Successfully Created');
+        dispatch(
+          addNewDepartment(formDataSend, () => {
+            navigate('/admin/department');
+          })
+        );
+      }
     }
   };
 
