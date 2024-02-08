@@ -1,5 +1,5 @@
 import classes from './style.module.scss';
-
+import { FormattedMessage } from 'react-intl';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { setLogin, setToken } from '@pages/Login/actions';
@@ -17,13 +17,14 @@ const Dropdown = () => {
         <li className={classes.baris} onClick={() => navigate('/profile')}>
           <p>Profile</p>
         </li>
-        <li className={classes.baris} onClick={() => navigate('/create')}>
-          {' '}
-          <p>New Journey</p>
+        <li className={classes.baris} onClick={() => navigate('/admin/department')}>
+          <p><FormattedMessage id="app_text_department" /></p>
         </li>
-        <li className={classes.baris} onClick={() => navigate('/bookmark')}>
-          {' '}
-          <p>Bookmark</p>
+        <li className={classes.baris} onClick={() => navigate('/admin/employee')}>
+        <p><FormattedMessage id="app_text_employee" /></p>
+        </li>
+        <li className={classes.baris} onClick={() => navigate('/admin/project')}>
+        <p><FormattedMessage id="app_text_project" /></p>
         </li>
         <li style={{ border: '1px solid #A8A8A8', width: '100%' }}></li>
         <li className={classes.baris} onClick={logout}>

@@ -8,7 +8,7 @@
   top: 0;
   .contentWrapper {
     @include directionX;
-
+    margin-right: 2rem;
     color: var(--color-text);
     padding: 1rem;
     align-items: center;
