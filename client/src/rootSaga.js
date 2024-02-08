@@ -12,6 +12,6 @@ export default function* rootSaga() {
     registerSaga(),
     loginSaga(),
     departmentSaga(),
-    newDepartmentSaga()
+    newDepartmentSaga(),
   ]);
 }
