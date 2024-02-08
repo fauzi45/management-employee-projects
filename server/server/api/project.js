@@ -19,8 +19,23 @@ const listProject = async (req, res) => {
   }
 };
 
-
+const createProject = async (req, res) => {
+  try {
+    const { name, description, startDate, endDate } = req.body;
+    const response = await ProjectHelper.createProjectHelper({
+      name,
+      description,
+      startDate,
+      endDate,
+    });
+    return res.send(response);
+  } catch (err) {
+    console.log([fileName, "createProject", "ERROR"], { info: `${err}` });
+    return res.send(GeneralHelper.errorResponse(err));
+  }
+};
 
 Router.get("/projectList", listProject);
+Router.post("/create", createProject);
 
 module.exports = Router;

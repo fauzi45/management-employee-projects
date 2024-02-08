@@ -21,8 +21,26 @@ const getProjectListHelper = async () => {
   }
 };
 
-
+const createProjectHelper = async (dataObject) => {
+  const { name, description, startDate, endDate } = dataObject;
+  try {
+    const response = await db.Projects.create({
+      name,
+      description,
+      startDate,
+      endDate,
+      status: false,
+    });
+    return Promise.resolve(true);
+  } catch (err) {
+    console.log([fileName, "createProjectHelper", "ERROR"], {
+      info: `${err}`,
+    });
+    return Promise.reject(GeneralHelper.errorResponse(err));
+  }
+};
 
 module.exports = {
   getProjectListHelper,
+  createProjectHelper,
 };
