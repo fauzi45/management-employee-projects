@@ -20,6 +20,11 @@ export default {
   app_table_employee_name: 'Nama Pegawai',
   app_table_department_name: 'Nama Departemen',
   app_table_role: 'Peran',
+  app_table_description: 'Deskripsi',
+  app_table_start_date: 'Tanggal Mulai',
+  app_table_end_date: 'Tanggal Selesai',
+  app_table_proccess: 'Proses',
+  app_table_done: 'Selesai',
 
 
   app_button_add: 'Tambah',
@@ -34,6 +39,7 @@ export default {
   app_text_name_placeholder: 'Name...',
   
   app_text_project: 'Projek',
+  
   app_text_employee: 'Pegawai',
   app_text_team_project: 'Projek Tim',
 };

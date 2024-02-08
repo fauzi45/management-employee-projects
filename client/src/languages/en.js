@@ -20,6 +20,11 @@ export default {
   app_table_employee_name: 'Employee Name',
   app_table_department_name: 'Department Name',
   app_table_role: 'Role',
+  app_table_description: 'Deskripsi',
+  app_table_start_date: 'Start Date',
+  app_table_end_date: 'End Date',
+  app_table_proccess: 'Process',
+  app_table_done: 'Done',
 
   app_button_add: 'Add',
   app_button_update: 'Update',
