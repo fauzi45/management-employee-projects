@@ -28,14 +28,32 @@ const createProject = async (req, res) => {
       startDate,
       endDate,
     });
-    return res.send(response);
+    return res.send({
+      message: "Project data successfully created",
+      response,
+    });
   } catch (err) {
     console.log([fileName, "createProject", "ERROR"], { info: `${err}` });
     return res.send(GeneralHelper.errorResponse(err));
   }
 };
 
+const deleteProject = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const response = await ProjectHelper.deleteProjectHelper(id);
+    return res.status(200).send({
+      message: "Project data successfully deleted",
+      response,
+    });
+  } catch (err) {
+    console.log([fileName, "deleteProject", "ERROR"], { info: `${err}` });
+    return res.send(GeneralHelper.errorResponse(err));
+  }
+};
+
 Router.get("/projectList", listProject);
 Router.post("/create", createProject);
+Router.delete("/delete/:id", deleteProject);
 
 module.exports = Router;

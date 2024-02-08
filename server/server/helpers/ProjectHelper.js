@@ -40,7 +40,33 @@ const createProjectHelper = async (dataObject) => {
   }
 };
 
+const deleteProjectHelper = async (id) => {
+  try {
+    const checkProject = await db.Projects.findOne({
+      where: { id: id },
+    });
+    if (!checkProject) {
+      return Promise.reject(
+        Boom.badRequest("Project with this id is doesn't exist")
+      );
+    } else {
+      await db.Projects.destroy({
+        where: {
+          id: id,
+        },
+      });
+    }
+    return Promise.resolve(true);
+  } catch (err) {
+    console.log([fileName, "deleteProjectHelper", "ERROR"], {
+      info: `${err}`,
+    });
+    return Promise.reject(GeneralHelper.errorResponse(err));
+  }
+};
+
 module.exports = {
   getProjectListHelper,
   createProjectHelper,
+  deleteProjectHelper
 };
