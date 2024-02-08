@@ -22,12 +22,14 @@ export default {
   app_table_role: 'Role',
 
   app_button_add: 'Add',
+  app_button_update: 'Update',
   app_placeholder_search: 'Search',
   app_no_data: 'Data Empty',
   app_no_data_filter: 'No matching data found',
 
   app_text_department: 'Department',
   app_text_department_create: 'Create Department',
+  app_text_department_update: 'Update Department',
   app_text_name_placeholder: 'Name...',
   app_text_project: 'Project',
   app_text_employee: 'Employee',
