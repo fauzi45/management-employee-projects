@@ -1,7 +1,7 @@
 import { detailDepartment, newDepartment } from "@domain/api";
 import { ADD_NEW_DEPARTMENT, GET_DETAIL_DEPARTMENT } from "./constants";
 import { takeLatest, call, put } from 'redux-saga/effects';
-import { setLoading } from "@containers/App/actions";
+import { setLoading, showPopup } from "@containers/App/actions";
 import { setDetailDepartment } from "./actions";
 
 function* doNewDepartment({ data, cb }) {
@@ -19,10 +19,9 @@ function* doNewDepartment({ data, cb }) {
     yield put(setLoading(true));
     try {
       const response = yield call(detailDepartment, id);
-      yield put(setDetailDepartment(response));
-      cb();
+      yield put(setDetailDepartment(response.data));
     } catch (error) {
-      console.log(error);
+      yield put(showPopup(error.info));
     }
     yield put(setLoading(false));
   }

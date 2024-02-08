@@ -13,23 +13,29 @@ import { selectDepartment } from '../../selector';
 import toast, { Toaster } from 'react-hot-toast';
 
 import { createStructuredSelector } from 'reselect';
+import { selectDepartmentDetail } from './selector';
 
-const FormDepartment = () => {
+const FormDepartment = ({ departmentDetail }) => {
   const intl = useIntl();
+  const { id } = useParams();
   const navigate = useNavigate();
-  const [data, setData] = useState({});
   const [formData, setFormData] = useState({
     name: '',
   });
+  console.log(formData);
 
   const dispatch = useDispatch();
-  const { id } = useParams();
-
   useEffect(() => {
     if (id) {
       dispatch(getDetailDepartment(id));
     }
   }, [id]);
+
+  useEffect(() => {
+    if (id) {
+      setFormData(departmentDetail);
+    }
+  }, [departmentDetail]);
 
   const submitData = () => {
     const formDataSend = new FormData();
@@ -45,11 +51,13 @@ const FormDepartment = () => {
       );
     }
   };
+
   return (
     <div className={classes.container}>
       <div className={classes.title}>
-        <FormattedMessage id="app_text_department_create" />
+        {id ? <FormattedMessage id="app_text_department_update" /> : <FormattedMessage id="app_text_department_create" />}
       </div>
+
       <div className={classes.containercontent}>
         <div className={classes.subTitle}>
           <FormattedMessage id="app_table_name" />
@@ -64,7 +72,7 @@ const FormDepartment = () => {
 
         <div className={classes.post}>
           <Button onClick={submitData} variant="contained">
-            <FormattedMessage id="app_button_add" />
+            {id ? <FormattedMessage id="app_button_update" /> : <FormattedMessage id="app_button_add" />}
           </Button>
         </div>
       </div>
@@ -74,6 +82,7 @@ const FormDepartment = () => {
 };
 
 const mapStateToProps = createStructuredSelector({
+  departmentDetail: selectDepartmentDetail
 });
 
 export default connect(mapStateToProps)(FormDepartment);
