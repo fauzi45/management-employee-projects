@@ -9,7 +9,7 @@ const Port = process.env.NODEJS_PORT || 5000;
 // Import routes
 const Auths = require('./server/api/auth');
 const Department = require('./server/api/departments');
-
+const Project = require('./server/api/project');
 dotenv.config();
 
 // Middleware
@@ -74,7 +74,7 @@ app.use((req, res, next) => {
 // Route middlewares
 app.use('/api/auth', Auths);
 app.use('/api/department', Department);
-
+app.use('/api/project', Project);
 // Sys ping api 
 app.get('/sys/ping', (req, res) => {
   req.startTime = process.hrtime();
