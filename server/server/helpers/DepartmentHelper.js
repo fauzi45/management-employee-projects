@@ -49,6 +49,27 @@ const getDepartmentDetailHelper = async (id) => {
   }
 };
 
+const updateDepartmentHelper = async (id, name) => {
+  try {
+    const checkDepartment = await db.Departments.findOne({
+      where: { id: id },
+    });
+    if (!checkDepartment) {
+      return Promise.reject(
+        Boom.badRequest("Department with this id is doesn't exist")
+      );
+    } else {
+      await db.Departments.update(
+        { name: name ? name : checkDepartment.dataValues.name },
+        { where: { id: id } }
+      );
+    }
+    return Promise.resolve([]);
+  } catch (error) {
+    return Promise.reject(GeneralHelper.errorResponse(err));
+  }
+};
+
 const deleteDepartmentHelper = async (id) => {
   try {
     const checkDepartment = await db.Departments.findOne({
@@ -78,5 +99,6 @@ module.exports = {
   getDepartmentListHelper,
   getDepartmentDetailHelper,
   createDepartmentHelper,
+  updateDepartmentHelper,
   deleteDepartmentHelper,
 };

@@ -44,6 +44,21 @@ const detailDepartment = async (req, res) => {
   }
 };
 
+const updateDepartment = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { name } = req.body;
+    const response = await DepartmentHelper.updateDepartmentHelper(id, name);
+    return res.send({
+      message: "Department data successfully updated",
+      data: response,
+    });
+  } catch (err) {
+    console.log([fileName, "updateDepartment", "ERROR"], { info: `${err}` });
+    return res.send(GeneralHelper.errorResponse(err));
+  }
+};
+
 const deleteDepartment = async (req, res) => {
   try {
     const { id } = req.params;
@@ -62,6 +77,7 @@ const deleteDepartment = async (req, res) => {
 Router.get("/departmentList", listDepartment);
 Router.post("/create", createDepartment);
 Router.get("/detail/:id", detailDepartment);
+Router.put("/update/:id", updateDepartment);
 Router.delete("/delete/:id", deleteDepartment);
 
 module.exports = Router;
