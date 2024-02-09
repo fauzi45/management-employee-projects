@@ -18,10 +18,10 @@ const getDepartmentListHelper = async () => {
 
 const createDepartmentHelper = async (name) => {
   try {
-    const response = await db.Departments.create({
+    await db.Departments.create({
       name: name,
     });
-    return Promise.resolve(response);
+    return Promise.resolve(true);
   } catch (err) {
     console.log([fileName, "createDepartmentHelper", "ERROR"], {
       info: `${err}`,
