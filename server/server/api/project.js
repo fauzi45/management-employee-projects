@@ -19,6 +19,20 @@ const listProject = async (req, res) => {
   }
 };
 
+const detailProject = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const response = await ProjectHelper.getProjectDetailHelper(id);
+    return res.send({
+      message: "Project detail data received successfully",
+      data: response,
+    });
+  } catch (err) {
+    console.log([fileName, "detailProject", "ERROR"], { info: `${err}` });
+    return res.send(GeneralHelper.errorResponse(err));
+  }
+};
+
 const createProject = async (req, res) => {
   try {
     const { name, description, startDate, endDate } = req.body;
@@ -53,6 +67,7 @@ const deleteProject = async (req, res) => {
 };
 
 Router.get("/projectList", listProject);
+Router.get("/detail/:id", detailProject);
 Router.post("/create", createProject);
 Router.delete("/delete/:id", deleteProject);
 

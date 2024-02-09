@@ -8,7 +8,6 @@ const getProjectListHelper = async () => {
   try {
     const checkProject = await db.Projects.findAll();
 
-    console.log(checkProject, "<<<<<server");
     if (_.isEmpty(checkProject)) {
       return Promise.reject(Boom.badRequest("Project data is empty"));
     }
@@ -21,10 +20,29 @@ const getProjectListHelper = async () => {
   }
 };
 
+const getProjectDetailHelper = async (id) => {
+  try {
+    const response = await db.Projects.findOne({
+      where: { id: id },
+    });
+    if (!response) {
+      return Promise.reject(
+        Boom.badRequest("Project with this id is doesn't exist")
+      );
+    }
+    return Promise.resolve(response);
+  } catch (error) {
+    console.log([fileName, "getProjectDetailHelper", "ERROR"], {
+      info: `${err}`,
+    });
+    return Promise.reject(GeneralHelper.errorResponse(err));
+  }
+};
+
 const createProjectHelper = async (dataObject) => {
   const { name, description, startDate, endDate } = dataObject;
   try {
-    const response = await db.Projects.create({
+    await db.Projects.create({
       name,
       description,
       startDate,
@@ -67,6 +85,7 @@ const deleteProjectHelper = async (id) => {
 
 module.exports = {
   getProjectListHelper,
+  getProjectDetailHelper,
   createProjectHelper,
-  deleteProjectHelper
+  deleteProjectHelper,
 };
