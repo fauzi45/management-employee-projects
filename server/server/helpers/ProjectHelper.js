@@ -58,6 +58,31 @@ const createProjectHelper = async (dataObject) => {
   }
 };
 
+const updateProjectHelper = async (id, name, description, startDate, endDate, status) => {
+  try {
+    const checkProject = await db.Projects.findOne({
+      where: { id: id },
+    });
+    if (!checkProject) {
+      return Promise.reject(
+        Boom.badRequest("Project with this id is doesn't exist")
+      );
+    } else {
+      await db.Projects.update(
+        { name: name ? name : checkProject.dataValues.name,
+          description: description ? description : checkProject.dataValues.description,
+          startDate: startDate ? startDate : checkProject.dataValues.startDate,
+          endDate: endDate ? endDate : checkProject.dataValues.endDate,
+          status: status ? status : checkProject.dataValues.status, },
+        { where: { id: id } }
+      );
+    }
+    return Promise.resolve(true);
+  } catch (error) {
+    return Promise.reject(GeneralHelper.errorResponse(err));
+  }
+};
+
 const deleteProjectHelper = async (id) => {
   try {
     const checkProject = await db.Projects.findOne({
@@ -87,5 +112,6 @@ module.exports = {
   getProjectListHelper,
   getProjectDetailHelper,
   createProjectHelper,
+  updateProjectHelper,
   deleteProjectHelper,
 };

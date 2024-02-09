@@ -4,7 +4,7 @@ const ProjectHelper = require("../helpers/ProjectHelper");
 
 const GeneralHelper = require("../helpers/generalHelper");
 
-const fileName = "server/api/departments.js";
+const fileName = "server/api/projects.js";
 
 const listProject = async (req, res) => {
   try {
@@ -52,6 +52,28 @@ const createProject = async (req, res) => {
   }
 };
 
+const updateProject = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { name, description, startDate, endDate, status } = req.body;
+    const response = await ProjectHelper.updateProjectHelper(
+      id,
+      name,
+      description,
+      startDate,
+      endDate,
+      status
+    );
+    return res.send({
+      message: "Project data successfully updated",
+      data: response,
+    });
+  } catch (err) {
+    console.log([fileName, "updateProject", "ERROR"], { info: `${err}` });
+    return res.send(GeneralHelper.errorResponse(err));
+  }
+};
+
 const deleteProject = async (req, res) => {
   try {
     const { id } = req.params;
@@ -69,6 +91,7 @@ const deleteProject = async (req, res) => {
 Router.get("/projectList", listProject);
 Router.get("/detail/:id", detailProject);
 Router.post("/create", createProject);
+Router.put("/update/:id", updateProject);
 Router.delete("/delete/:id", deleteProject);
 
 module.exports = Router;
