@@ -7,7 +7,6 @@ const fileName = "server/helpers/ProjectHelper.js";
 const getProjectListHelper = async () => {
   try {
     const checkProject = await db.Projects.findAll();
-
     if (_.isEmpty(checkProject)) {
       return Promise.reject(Boom.badRequest("Project data is empty"));
     }

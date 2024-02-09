@@ -4,6 +4,8 @@ const ProjectHelper = require("../helpers/ProjectHelper");
 
 const GeneralHelper = require("../helpers/generalHelper");
 
+const ValidationProjectHelper = require("../validation/ValidationProject");
+
 const fileName = "server/api/projects.js";
 
 const listProject = async (req, res) => {
@@ -21,6 +23,7 @@ const listProject = async (req, res) => {
 
 const detailProject = async (req, res) => {
   try {
+    ValidationProjectHelper.detailProjectValidation(req.params);
     const { id } = req.params;
     const response = await ProjectHelper.getProjectDetailHelper(id);
     return res.send({
@@ -35,6 +38,7 @@ const detailProject = async (req, res) => {
 
 const createProject = async (req, res) => {
   try {
+    ValidationProjectHelper.createProjectValidation(req.body);
     const { name, description, startDate, endDate } = req.body;
     const response = await ProjectHelper.createProjectHelper({
       name,
@@ -54,6 +58,8 @@ const createProject = async (req, res) => {
 
 const updateProject = async (req, res) => {
   try {
+    ValidationProjectHelper.detailProjectValidation(req.params);
+    ValidationProjectHelper.updateProjectValidation(req.body);
     const { id } = req.params;
     const { name, description, startDate, endDate, status } = req.body;
     const response = await ProjectHelper.updateProjectHelper(
@@ -76,6 +82,7 @@ const updateProject = async (req, res) => {
 
 const deleteProject = async (req, res) => {
   try {
+    ValidationProjectHelper.deleteProjectValidation(req.params);
     const { id } = req.params;
     const response = await ProjectHelper.deleteProjectHelper(id);
     return res.status(200).send({
