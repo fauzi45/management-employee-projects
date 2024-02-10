@@ -19,6 +19,8 @@ const urls = {
   detailProject: 'project/detail',
   updateProject: 'project/update',
   deleteProject: 'project/delete',
+
+  allEmployee: 'employee/employeeList',
 };
 
 export const callAPI = async (endpoint, method, header = {}, params = {}, data = {}) => {
@@ -61,3 +63,5 @@ export const newProject = (data) => callAPI(urls.createProject, 'POST', {}, {}, 
 export const detailProject = (id) => callAPI(`${urls.detailProject}/${id}`, 'GET');
 export const updateProject = (id, data) => callAPI(`${urls.updateProject}/${id}`, 'PUT', {}, {}, data);
 export const deleteProject = (id) => callAPI(`${urls.deleteProject}/${id}`, 'DELETE');
+
+export const fetchDataEmployee = () => callAPI(urls.allEmployee, 'GET');
