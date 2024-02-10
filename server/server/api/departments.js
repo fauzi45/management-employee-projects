@@ -4,6 +4,8 @@ const DepartmentHelper = require("../helpers/DepartmentHelper");
 
 const GeneralHelper = require("../helpers/generalHelper");
 
+const ValidationDepartmentHelper = require("../validation/ValidationDepartment");
+
 const fileName = "server/api/departments.js";
 
 const listDepartment = async (req, res) => {
@@ -21,6 +23,7 @@ const listDepartment = async (req, res) => {
 
 const createDepartment = async (req, res) => {
   try {
+    ValidationDepartmentHelper.createDepartmentValidation(req.body);
     const { name } = req.body;
     const response = await DepartmentHelper.createDepartmentHelper(name);
     return res.send(response);
@@ -32,6 +35,7 @@ const createDepartment = async (req, res) => {
 
 const detailDepartment = async (req, res) => {
   try {
+    ValidationDepartmentHelper.detailDepartmentValidation(req.params);
     const { id } = req.params;
     const response = await DepartmentHelper.getDepartmentDetailHelper(id);
     return res.send({
@@ -46,6 +50,8 @@ const detailDepartment = async (req, res) => {
 
 const updateDepartment = async (req, res) => {
   try {
+    ValidationDepartmentHelper.detailDepartmentValidation(req.params);
+    ValidationDepartmentHelper.updateDepartmentValidation(req.body);
     const { id } = req.params;
     const { name } = req.body;
     const response = await DepartmentHelper.updateDepartmentHelper(id, name);
@@ -61,8 +67,8 @@ const updateDepartment = async (req, res) => {
 
 const deleteDepartment = async (req, res) => {
   try {
+    ValidationProjectHelper.deleteProjectValidation(req.params);
     const { id } = req.params;
-    console.log(id);
     const response = await DepartmentHelper.deleteDepartmentHelper(id);
     return res.status(200).send({
       message: "Department data successfully deleted",
