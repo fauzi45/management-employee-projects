@@ -44,6 +44,21 @@ const getEmployeeDetailHelper = async (id) => {
   }
 };
 
+const deleteProject = async (req, res) => {
+  try {
+    ValidationProjectHelper.deleteProjectValidation(req.params);
+    const { id } = req.params;
+    const response = await ProjectHelper.deleteProjectHelper(id);
+    return res.status(200).send({
+      message: "Project data successfully deleted",
+      response,
+    });
+  } catch (err) {
+    console.log([fileName, "deleteProject", "ERROR"], { info: `${err}` });
+    return res.send(GeneralHelper.errorResponse(err));
+  }
+};
+
 module.exports = {
     getEmployeeListHelper,
     getEmployeeDetailHelper

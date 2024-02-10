@@ -37,6 +37,20 @@ const listEmployee = async (req, res) => {
     }
   };
 
+  const deleteEmployee = async (req, res) => {
+    try {
+      const { id } = req.params;
+      const response = await EmployeeHelper.deleteEmployeeHelper(id);
+      return res.status(200).send({
+        message: "Employee data successfully deleted",
+        response,
+      });
+    } catch (err) {
+      console.log([fileName, "deleteEmployee", "ERROR"], { info: `${err}` });
+      return res.send(GeneralHelper.errorResponse(err));
+    }
+  };
+
   Router.get("/employeeList", listEmployee);
   Router.get("/detail/:id", detailEmployee);
 
