@@ -36,7 +36,11 @@ export default {
   app_text_department_create: 'Create Department',
   app_text_department_update: 'Update Department',
   app_text_name_placeholder: 'Name...',
+
   app_text_project: 'Project',
+  app_text_project_create: 'Create Project',
+  app_text_project_update: 'Update Project',
+
   app_text_employee: 'Employee',
   app_text_team_project: 'Team Project'
 };
