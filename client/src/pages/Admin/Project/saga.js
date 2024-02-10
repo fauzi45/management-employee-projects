@@ -23,7 +23,7 @@ function* doRemoveProject({ id,cb }) {
   try {
     yield call(deleteProject, id);
     cb();
-    toast.success('Department Successfully deleted');
+    toast.success('Project Successfully deleted');
   } catch (error) {
     yield put(showPopup(error.info));
   }
