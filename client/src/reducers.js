@@ -10,6 +10,7 @@ import loginReducer, { storedKey as storedEmployeeLogin } from '@pages/Login/red
 import departmentReducer, { storedKey as storedDepartment } from '@pages/Admin/Department/reducer';
 import createNewDepartment,{ storedKey as storedNewDepartment} from '@pages/Admin/Department/components/FormDepartment/reducer';
 import projectReducer,{ storedKey as storedProject} from '@pages/Admin/Project/reducer';
+import createNewProject,{ storedKey as storedNewProject} from '@pages/Admin/Project/components/FormProject/reducer';
 
 const storedReducers = {
   app: { reducer: appReducer, whitelist: storedAppState },
@@ -21,6 +22,7 @@ const storedReducers = {
   newDepartment: {reducer: createNewDepartment, whitelist: storedNewDepartment},
 
   project: { reducer: projectReducer, whitelist: storedProject },
+  newProject: {reducer: createNewProject, whitelist: storedNewProject},
 };
 
 const temporaryReducers = {
