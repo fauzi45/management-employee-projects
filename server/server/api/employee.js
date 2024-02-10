@@ -4,6 +4,9 @@ const EmployeeHelper = require("../helpers/EmployeeHelper");
 
 const GeneralHelper = require("../helpers/generalHelper");
 
+const ValidationEmployeeHelper = require("../validation/ValidationEmployee");
+
+
 const fileName = "server/api/employee.js";
 
 const listEmployee = async (req, res) => {
@@ -19,6 +22,22 @@ const listEmployee = async (req, res) => {
     }
   };
 
+  const detailEmployee = async (req, res) => {
+    try {
+      ValidationEmployeeHelper.detailEmployeeValidation(req.params);
+      const { id } = req.params;
+      const response = await EmployeeHelper.getEmployeeDetailHelper(id);
+      return res.send({
+        message: "Employee detail data received successfully",
+        data: response,
+      });
+    } catch (err) {
+      console.log([fileName, "detailEmployee", "ERROR"], { info: `${err}` });
+      return res.send(GeneralHelper.errorResponse(err));
+    }
+  };
+
   Router.get("/employeeList", listEmployee);
+  Router.get("/detail/:id", detailEmployee);
 
   module.exports = Router;

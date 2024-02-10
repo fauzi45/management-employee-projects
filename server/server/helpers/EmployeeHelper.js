@@ -24,6 +24,27 @@ const getEmployeeListHelper = async () => {
   }
 };
 
+const getEmployeeDetailHelper = async (id) => {
+  try {
+    const response = await db.Employees.findOne({
+      where: { id: id },
+      include: "department",
+    });
+    if (!response) {
+      return Promise.reject(
+        Boom.badRequest("Employee with this id is doesn't exist")
+      );
+    }
+    return Promise.resolve(response);
+  } catch (error) {
+    console.log([fileName, "getEmployeeDetailHelper", "ERROR"], {
+      info: `${err}`,
+    });
+    return Promise.reject(GeneralHelper.errorResponse(err));
+  }
+};
+
 module.exports = {
     getEmployeeListHelper,
+    getEmployeeDetailHelper
   };
