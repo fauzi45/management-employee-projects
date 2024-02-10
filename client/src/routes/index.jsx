@@ -9,6 +9,7 @@ import Login from '@pages/Login';
 import NotFound from '@pages/NotFound';
 import Register from '@pages/Register';
 import CreateDepartment from '@pages/Admin/Department/components/FormDepartment';
+import FormProject from '@pages/Admin/Project/components/FormProject';
 
 const routes = [
   {
@@ -51,6 +52,20 @@ const routes = [
     name: 'Project',
     protected: false,
     component: Project,
+    layout: MainLayout,
+  },
+  {
+    path: '/admin/project/form',
+    name: 'Form Project',
+    protected: false,
+    component: FormProject,
+    layout: MainLayout,
+  },
+  {
+    path: '/admin/project/form/:id',
+    name: 'Form Project',
+    protected: false,
+    component: FormProject,
     layout: MainLayout,
   },
   {
