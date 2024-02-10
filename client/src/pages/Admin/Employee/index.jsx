@@ -21,14 +21,32 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 import Typography from '@mui/material/Typography';
 
+import { createStructuredSelector } from 'reselect';
+import { useNavigate } from 'react-router-dom';
+import { useDispatch, connect } from 'react-redux';
+
 import classes from './style.module.scss';
+import { getFetchEmployee } from './actions';
+import { selectEmployee } from './selector';
+import { useEffect } from 'react';
 
-const Employee = () => {
+
+const Employee = ({employee}) => {
   const intl = useIntl();
-
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(10);
   const [searchedVal, setSearchedVal] = useState('');
+  const [data, setData] = useState([]);
+
+  useEffect(() => {
+    dispatch(getFetchEmployee());
+  }, [dispatch]);
+
+  useEffect(() => {
+    setData(employee);
+  }, [employee]);
 
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
@@ -48,32 +66,6 @@ const Employee = () => {
     { id: 'action', label: <FormattedMessage id="app_table_action" /> },
   ];
 
-  const rows = [
-    {
-      id: 1,
-      name: 'John Doe',
-      position: 'Software Engineer',
-      department: 'Engineering',
-      email: 'john.doe@example.com',
-    },
-    { id: 2, name: 'Jane Smith', position: 'Data Scientist', department: 'Research', email: 'jane.smith@example.com' },
-    {
-      id: 3,
-      name: 'Michael Johnson',
-      position: 'Product Manager',
-      department: 'Product Management',
-      email: 'michael.johnson@example.com',
-    },
-    {
-      id: 4,
-      name: 'Emily Brown',
-      position: 'Marketing Specialist',
-      department: 'Marketing',
-      email: 'emily.brown@example.com',
-    },
-    { id: 5, name: 'David Lee', position: 'Financial Analyst', department: 'Finance', email: 'david.lee@example.com' },
-  ];
-
   return (
     <div className={classes.container}>
       <div className={classes.wrapper}>
@@ -88,7 +80,7 @@ const Employee = () => {
             size="small"
             InputProps={{
               endAdornment: (
-                <InputAdornment>
+                <InputAdornment position="end">
                   <IconButton>
                     <SearchIcon />
                   </IconButton>
@@ -113,7 +105,7 @@ const Employee = () => {
                 </TableRow>
               </TableHead>
               <TableBody>
-                {rows
+                {data
                   .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                   .filter(
                     (row) =>
@@ -126,7 +118,7 @@ const Employee = () => {
                       <TableCell align="center">{row.name}</TableCell>
                       <TableCell align="center">{row.email}</TableCell>
                       <TableCell align="center">{row.position}</TableCell>
-                      <TableCell align="center">{row.department}</TableCell>
+                      <TableCell align="center">{row.department.name}</TableCell>
                       <TableCell align="center">
                         <IconButton aria-label="delete">
                           <DeleteIcon />
@@ -137,15 +129,15 @@ const Employee = () => {
                       </TableCell>
                     </TableRow>
                   ))}
-                {rows.length === 0 && searchedVal.length > 0 && (
+                {data.length === 0 && searchedVal.length > 0 && (
                   <TableRow>
                     <TableCell align="center" colSpan={columns.length}>
                       <FormattedMessage id="app_no_data" />
                     </TableCell>
                   </TableRow>
                 )}
-                {rows.length > 0 &&
-                  rows.filter(
+                {data.length > 0 &&
+                  data.filter(
                     (row) =>
                       !searchedVal.length ||
                       row.name.toString().toLowerCase().includes(searchedVal.toString().toLowerCase())
@@ -162,7 +154,7 @@ const Employee = () => {
           <TablePagination
             rowsPerPageOptions={[10, 25, 100]}
             component="div"
-            count={rows.length}
+            count={data.length}
             rowsPerPage={rowsPerPage}
             page={page}
             onPageChange={handleChangePage}
@@ -174,4 +166,9 @@ const Employee = () => {
   );
 };
 
-export default Employee;
+const mapStateToProps = createStructuredSelector({
+  employee: selectEmployee,
+  
+});
+
+export default connect(mapStateToProps)(Employee);
