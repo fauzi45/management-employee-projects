@@ -7,6 +7,7 @@ import departmentSaga from '@pages/Admin/Department/saga';
 import newDepartmentSaga from '@pages/Admin/Department/components/FormDepartment/saga';
 import projectSaga from '@pages/Admin/Project/saga';
 import newProjectSaga from '@pages/Admin/Project/components/FormProject/saga';
+import employeeSaga from '@pages/Admin/Employee/saga';
 
 export default function* rootSaga() {
   yield all([
@@ -16,6 +17,7 @@ export default function* rootSaga() {
     departmentSaga(),
     newDepartmentSaga(),
     projectSaga(),
-    newProjectSaga()
+    newProjectSaga(),
+    employeeSaga(),
   ]);
 }
