@@ -5,7 +5,7 @@ export const initialState = {
   employee: {},
 };
 
-export const storedKey = [''];
+export const storedKey = ['employee'];
 
 const registerReducer = (state = initialState, action) =>
   produce(state, (draft) => {
