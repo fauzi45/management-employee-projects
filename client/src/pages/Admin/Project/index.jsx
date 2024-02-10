@@ -89,7 +89,7 @@ const Project = ({ project, token }) => {
   };
 
   const handleUpdate = (id) => {
-    navigate(`/admin/department/form/${id}`)
+    navigate(`/admin/project/form/${id}`)
   };
 
   return (
@@ -99,7 +99,7 @@ const Project = ({ project, token }) => {
           <FormattedMessage id="app_text_project" />
         </Typography>
         <div className={classes.feat}>
-          <Button startIcon={<AddBoxIcon />} variant="contained">
+          <Button startIcon={<AddBoxIcon />} onClick={() => navigate("/admin/project/form")} variant="contained">
             <FormattedMessage id="app_button_add" />
           </Button>
           <TextField
