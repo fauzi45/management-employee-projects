@@ -1,8 +1,8 @@
 import { takeLatest, call, put } from 'redux-saga/effects';
-import { setLogin, setToken } from './actions';
 import { login } from '@domain/api';
 import { setLoading, showPopup } from '@containers/App/actions';
 import { DO_LOGIN } from './constants';
+import { setLogin, setToken } from '@containers/Client/actions';
 
 function* doLogin({formData}) {
     setLoading(true);
@@ -11,8 +11,9 @@ function* doLogin({formData}) {
       const token = response.token;
       yield put(setLogin(true));
       yield put(setToken(token));
+      cb();
     } catch (error) {
-        console.log(error)
+        yield put(showPopup(error.info));
     }
     setLoading(false);
   }

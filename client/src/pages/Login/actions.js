@@ -1,16 +1,7 @@
-import { SET_LOGIN, SET_TOKEN, DO_LOGIN } from './constants';
+import { DO_LOGIN } from './constants';
 
-export const setLogin = (login) => ({
-  type: SET_LOGIN,
-  login,
-});
-
-export const setToken = (token) => ({
-  type: SET_TOKEN,
-  token,
-});
-
-export const doLoginAction = (formData) => ({
+export const doLoginAction = (formData,cb) => ({
   type: DO_LOGIN,
-  formData
+  formData,
+  cb
 });

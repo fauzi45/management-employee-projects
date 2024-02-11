@@ -27,13 +27,13 @@ import Typography from '@mui/material/Typography';
 import classes from './style.module.scss';
 
 import { createStructuredSelector } from 'reselect';
-import { selectToken } from '@pages/Login/selectors';
 import { selectDepartment } from './selector';
 import { deleteDepartment, getFetchDepartment } from './actions';
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import toast, { Toaster } from 'react-hot-toast';
+import { selectToken } from '@containers/Client/selectors';
 
 const Department = ({ department, token }) => {
   const intl = useIntl();

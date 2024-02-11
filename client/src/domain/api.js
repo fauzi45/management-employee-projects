@@ -7,6 +7,7 @@ const urls = {
   ping: 'ping.json',
   register: 'auth/register',
   login: 'auth/login',
+  getUser: 'auth/getUser',
 
   allDepartment: 'department/departmentList',
   createDepartment: 'department/create',
@@ -56,6 +57,8 @@ export const login = (login) => {
   return callAPI(urls.login, 'POST', {}, {}, login);
 };
 
+export const getUser = () => callAPI(urls.getUser, 'GET');
+
 export const fetchDepartment = () => callAPI(urls.allDepartment, 'GET');
 export const newDepartment = (data) => callAPI(urls.createDepartment, 'POST', {}, {}, data);
 export const detailDepartment = (id) => callAPI(`${urls.detailDepartment}/${id}`, 'GET');
@@ -69,4 +72,5 @@ export const updateProject = (id, data) => callAPI(`${urls.updateProject}/${id}`
 export const deleteProject = (id) => callAPI(`${urls.deleteProject}/${id}`, 'DELETE');
 
 export const fetchDataEmployee = () => callAPI(urls.allEmployee, 'GET');
+export const detailEmployee = (id) => callAPI(`${urls.detailEmployee}/${id}`, 'GET');
 export const deleteEmployee = (id) => callAPI(`${urls.deleteEmployee}/${id}`, 'DELETE');

@@ -30,10 +30,10 @@ import { useDispatch, connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import { useEffect } from 'react';
 import { deleteProject, getFetchProject } from './actions';
-import { selectToken } from '@pages/Login/selectors';
 import { selectProject } from './selector';
 
 import toast, { Toaster } from 'react-hot-toast';
+import { selectToken } from '@containers/Client/selectors';
 
 const Project = ({ project, token }) => {
   const intl = useIntl();

@@ -1,21 +1,27 @@
 import { useEffect } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch,connect } from 'react-redux';
 import { FormattedMessage } from 'react-intl';
+import { createStructuredSelector } from 'reselect';
+import { getFetchProfile } from '@pages/Admin/Profile/actions';
+import { SelectProfile } from '@pages/Admin/Profile/selector';
 
-import { ping } from '@containers/App/actions';
-
-const Home = () => {
+const Home = ({ profile }) => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(ping());
+    dispatch(getFetchProfile());
   }, [dispatch]);
 
   return (
     <div>
-      <FormattedMessage id="app_greeting" />
+      <FormattedMessage id="app_greeting" />{profile.name}
     </div>
   );
 };
 
-export default Home;
+const mapStateToProps = createStructuredSelector({
+    profile: SelectProfile
+    
+});
+
+export default connect(mapStateToProps)(Home);

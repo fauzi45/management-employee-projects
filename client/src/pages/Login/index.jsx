@@ -13,7 +13,7 @@ import { Icon } from 'react-icons-kit';
 import { eyeOff } from 'react-icons-kit/feather/eyeOff';
 import { eye } from 'react-icons-kit/feather/eye';
 import { doLoginAction } from './actions';
-import { selectToken } from './selectors';
+import { selectToken } from '@containers/Client/selectors';
 
 const Login = ({ token }) => {
   const [type, setType] = useState('password');

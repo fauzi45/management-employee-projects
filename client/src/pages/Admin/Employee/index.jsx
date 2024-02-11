@@ -30,8 +30,8 @@ import { deleteEmployee, getFetchEmployee } from './actions';
 import { selectEmployee } from './selector';
 import { useEffect } from 'react';
 import toast, { Toaster } from 'react-hot-toast';
-import { selectToken } from '@pages/Login/selectors';
 import { jwtDecode } from "jwt-decode";
+import { selectToken } from '@containers/Client/selectors';
 
 const Employee = ({ employee, token }) => {
   const intl = useIntl();
@@ -42,7 +42,6 @@ const Employee = ({ employee, token }) => {
   const [searchedVal, setSearchedVal] = useState('');
   const [data, setData] = useState([]);
   const decoded = jwtDecode(token);
-  console.log(decoded);
 
   useEffect(() => {
     dispatch(getFetchEmployee());
