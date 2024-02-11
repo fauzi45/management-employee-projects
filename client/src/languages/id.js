@@ -44,5 +44,8 @@ export default {
   app_text_project_update: 'Ubah Project',
   
   app_text_employee: 'Pegawai',
+  app_text_employee_create: 'Buat Pegawai',
+  app_text_employee_update: 'Ubah Pegawai',
+
   app_text_team_project: 'Projek Tim',
 };

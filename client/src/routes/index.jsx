@@ -10,6 +10,7 @@ import NotFound from '@pages/NotFound';
 import Register from '@pages/Register';
 import CreateDepartment from '@pages/Admin/Department/components/FormDepartment';
 import FormProject from '@pages/Admin/Project/components/FormProject';
+import FormEmployee from '@pages/Admin/Employee/components/FormEmployee';
 
 const routes = [
   {
@@ -24,6 +25,21 @@ const routes = [
     name: 'Employee',
     protected: true,
     component: Employee,
+    layout: MainLayout,
+  },
+  ,
+  {
+    path: '/admin/Employee/form',
+    name: 'Form Employee',
+    protected: true,
+    component: FormEmployee,
+    layout: MainLayout,
+  },
+  {
+    path: '/admin/Employee/form/:id',
+    name: 'Form Employee',
+    protected: true,
+    component: FormEmployee,
     layout: MainLayout,
   },
   {

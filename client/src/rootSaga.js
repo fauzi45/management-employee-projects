@@ -9,17 +9,22 @@ import projectSaga from '@pages/Admin/Project/saga';
 import newProjectSaga from '@pages/Admin/Project/components/FormProject/saga';
 import employeeSaga from '@pages/Admin/Employee/saga';
 import profileSaga from '@pages/Admin/Profile/saga';
+import newEmployeeSaga from '@pages/Admin/Employee/components/FormEmployee/saga';
 
 export default function* rootSaga() {
   yield all([
     appSaga(),
     registerSaga(),
     loginSaga(),
+    profileSaga(),
+
     departmentSaga(),
     newDepartmentSaga(),
+    
     projectSaga(),
     newProjectSaga(),
+
     employeeSaga(),
-    profileSaga()
+    newEmployeeSaga()
   ]);
 }

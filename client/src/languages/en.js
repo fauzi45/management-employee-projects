@@ -45,5 +45,8 @@ export default {
   app_text_project_update: 'Update Project',
 
   app_text_employee: 'Employee',
+  app_text_employee_create: 'Create Employee',
+  app_text_employee_update: 'Update Employee',
+
   app_text_team_project: 'Team Project'
 };

@@ -95,7 +95,7 @@ const Employee = ({ employee, token }) => {
           <FormattedMessage id="app_text_employee" />
         </Typography>
         <div className={classes.feat}>
-          <Button startIcon={<AddBoxIcon />} variant="contained">
+          <Button startIcon={<AddBoxIcon />} onClick={() => navigate('/admin/employee/form')} variant="contained">
             <FormattedMessage id="app_button_add" />
           </Button>
           <TextField

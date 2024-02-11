@@ -73,4 +73,5 @@ export const deleteProject = (id) => callAPI(`${urls.deleteProject}/${id}`, 'DEL
 
 export const fetchDataEmployee = () => callAPI(urls.allEmployee, 'GET');
 export const detailEmployee = (id) => callAPI(`${urls.detailEmployee}/${id}`, 'GET');
+export const updateEmployee = (id, data) => callAPI(`${urls.updateEmployee}/${id}`, 'PUT', {}, {}, data);
 export const deleteEmployee = (id) => callAPI(`${urls.deleteEmployee}/${id}`, 'DELETE');
