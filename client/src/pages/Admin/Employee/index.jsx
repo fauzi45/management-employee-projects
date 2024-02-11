@@ -26,12 +26,14 @@ import { useNavigate } from 'react-router-dom';
 import { useDispatch, connect } from 'react-redux';
 
 import classes from './style.module.scss';
-import { getFetchEmployee } from './actions';
+import { deleteEmployee, getFetchEmployee } from './actions';
 import { selectEmployee } from './selector';
 import { useEffect } from 'react';
+import toast, { Toaster } from 'react-hot-toast';
+import { selectToken } from '@pages/Login/selectors';
+import { jwtDecode } from "jwt-decode";
 
-
-const Employee = ({employee}) => {
+const Employee = ({ employee, token }) => {
   const intl = useIntl();
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -39,10 +41,18 @@ const Employee = ({employee}) => {
   const [rowsPerPage, setRowsPerPage] = useState(10);
   const [searchedVal, setSearchedVal] = useState('');
   const [data, setData] = useState([]);
+  const decoded = jwtDecode(token);
+  console.log(decoded);
 
   useEffect(() => {
     dispatch(getFetchEmployee());
   }, [dispatch]);
+
+  useEffect(() => {
+    if (!token) {
+      navigate('/login');
+    }
+  }, [token]);
 
   useEffect(() => {
     setData(employee);
@@ -65,6 +75,19 @@ const Employee = ({employee}) => {
     { id: 'department', label: <FormattedMessage id="app_text_department" /> },
     { id: 'action', label: <FormattedMessage id="app_table_action" /> },
   ];
+
+  const handleDelete = (id) => {
+    dispatch(
+      deleteEmployee(
+        String(id),
+        () => dispatch(getFetchEmployee()),
+      )
+    );
+  };
+
+  const handleUpdate = (id) => {
+    navigate(`/admin/department/form/${id}`)
+  };
 
   return (
     <div className={classes.container}>
@@ -115,15 +138,16 @@ const Employee = ({employee}) => {
                   .map((row, index) => (
                     <TableRow hover role="checkbox" tabIndex={-1} key={row.id}>
                       <TableCell align="center">{page * rowsPerPage + index + 1}</TableCell>
-                      <TableCell align="center">{row.name}</TableCell>
+                      <TableCell align="center">{row.name} {row.id === decoded.employeeId ? "(You)" : ""}</TableCell>
                       <TableCell align="center">{row.email}</TableCell>
                       <TableCell align="center">{row.position}</TableCell>
                       <TableCell align="center">{row.department.name}</TableCell>
                       <TableCell align="center">
-                        <IconButton aria-label="delete">
-                          <DeleteIcon />
-                        </IconButton>
-                        <IconButton aria-label="update">
+                        {row.id === decoded.employeeId ? "" :
+                          <IconButton aria-label="delete" onClick={() => handleDelete(row.id)}>
+                            <DeleteIcon />
+                          </IconButton>}
+                        <IconButton aria-label="update" onClick={() => handleUpdate(row.id)}>
                           <EditIcon />
                         </IconButton>
                       </TableCell>
@@ -162,13 +186,14 @@ const Employee = ({employee}) => {
           />
         </Paper>
       </div>
+      <Toaster />
     </div>
   );
 };
 
 const mapStateToProps = createStructuredSelector({
   employee: selectEmployee,
-  
+  token: selectToken
 });
 
 export default connect(mapStateToProps)(Employee);
