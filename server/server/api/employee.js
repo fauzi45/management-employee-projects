@@ -53,5 +53,6 @@ const listEmployee = async (req, res) => {
 
   Router.get("/employeeList", listEmployee);
   Router.get("/detail/:id", detailEmployee);
+  Router.delete("/delete/:id", deleteEmployee);
 
   module.exports = Router;
