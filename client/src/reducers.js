@@ -6,18 +6,18 @@ import languageReducer from '@containers/Language/reducer';
 
 import { mapWithPersistor } from './persistence';
 import registerReducer, { storedKey as storedEmployee } from '@pages/Register/reducer';
-import loginReducer, { storedKey as storedEmployeeLogin } from '@pages/Login/reducer';
 import departmentReducer, { storedKey as storedDepartment } from '@pages/Admin/Department/reducer';
 import createNewDepartment,{ storedKey as storedNewDepartment} from '@pages/Admin/Department/components/FormDepartment/reducer';
 import projectReducer,{ storedKey as storedProject} from '@pages/Admin/Project/reducer';
 import createNewProject,{ storedKey as storedNewProject} from '@pages/Admin/Project/components/FormProject/reducer';
 import employeeReducer,{ storedKey as storedDataEmployee} from '@pages/Admin/Employee/reducer';
+import profileReducer,{ storedKey as storedProfile} from '@pages/Admin/Profile/reducer';
 
 const storedReducers = {
   app: { reducer: appReducer, whitelist: storedAppState },
   client: { reducer: clientReducer, whitelist: storedClientState },
   register: {reducer: registerReducer, whitelist: storedEmployee},
-  login: {reducer: loginReducer, whitelist: storedEmployeeLogin},
+  profile: {reducer: profileReducer, whitelist: storedProfile},
 
   department: {reducer: departmentReducer, whitelist: storedDepartment},
   newDepartment: {reducer: createNewDepartment, whitelist: storedNewDepartment},
