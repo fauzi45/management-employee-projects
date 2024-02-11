@@ -27,7 +27,8 @@ const validateToken = (request, reply, next) => {
     if(isTokenExpired) {
       throw Boom.unauthorized();
     }
-    
+    request.header.employeeToken = verifiedUser;
+
     return next();
   } catch (err) {
     console.log([fileName, 'validateToken', 'ERROR'], { info: `${err}` });

@@ -52,7 +52,7 @@ const registerUser = async (dataObject) => {
       password: hashedPass,
       position,
       departmentId,
-      isAdmin: false
+      isAdmin: false,
     });
     return Promise.resolve(true);
   } catch (err) {
@@ -78,8 +78,8 @@ const login = async (dataObject) => {
     }
 
     const token = __generateToken({
-      employeeId: employee.id, 
-      isAdmin: employee.isAdmin
+      employeeId: employee.id,
+      isAdmin: employee.isAdmin,
     });
 
     return Promise.resolve({ token });
@@ -89,7 +89,25 @@ const login = async (dataObject) => {
   }
 };
 
+const getUser = async (dataEmployee) => {
+  try {
+    const checkUser = await db.Employees.findOne({
+      where: {
+        id: dataEmployee.employeeId,
+      },
+    });
+    if (_.isEmpty(checkUser)) {
+      return Promise.reject(Boom.notFound("USER_NOT_FOUND"));
+    }
+    return Promise.resolve(checkUser);
+  } catch (err) {
+    console.log([fileName, "getUser", "ERROR"], { info: `${err}` });
+    return Promise.reject(GeneralHelper.errorResponse(err));
+  }
+};
+
 module.exports = {
   registerUser,
   login,
+  getUser
 };
