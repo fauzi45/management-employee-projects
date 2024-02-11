@@ -25,7 +25,8 @@ export default {
   app_table_end_date: 'Tanggal Selesai',
   app_table_proccess: 'Proses',
   app_table_done: 'Selesai',
-
+  app_text_noacc: 'Belum ada akun? Silahkan daftar',
+  app_text_haveacc: 'Sudah punya akun? Silahkan masuk',
 
   app_button_add: 'Tambah',
   app_button_update: 'Ubah',

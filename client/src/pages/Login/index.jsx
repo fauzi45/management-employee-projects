@@ -86,6 +86,9 @@ const Login = ({ token }) => {
           <div onClick={onSubmit} className={classes.button}>
             <FormattedMessage id="app_text_login" />
           </div>
+          <div onClick={() => navigate('/register')} className={classes.noacc}>
+            <FormattedMessage id="app_text_noacc" />
+          </div>
         </div>
       </div>
       <Toaster />

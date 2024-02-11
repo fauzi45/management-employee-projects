@@ -14,8 +14,9 @@ import { eyeOff } from 'react-icons-kit/feather/eyeOff';
 import { eye } from 'react-icons-kit/feather/eye';
 
 import { setEmployee } from './action';
+import { selectDepartment } from '@pages/Admin/Department/selector';
 
-const Register = ({ token }) => {
+const Register = ({ token, department }) => {
   const [type, setType] = useState('password');
   const [icon, setIcon] = useState(eyeOff);
   const [password, setPassword] = useState('');
@@ -24,7 +25,7 @@ const Register = ({ token }) => {
   const [email, setEmail] = useState('');
   const [name, setName] = useState('');
   const [position, setPosition] = useState('');
-  const [departmentId, setDepartmentId] = useState(0);
+  const [selectedOption, setSelectedOption] = useState('');
 
   const handleToggle = () => {
     if (type === 'password') {
@@ -55,7 +56,7 @@ const Register = ({ token }) => {
         email: encryptPayload(email),
         password: encryptPayload(password),
         position: encryptPayload(position),
-        departmentId: encryptPayload(departmentId)
+        departmentId: encryptPayload(selectedOption)
       };
       dispatch(
         setEmployee(dataUser, () => {
@@ -69,11 +70,11 @@ const Register = ({ token }) => {
     }
   };
 
-  //   useEffect(() => {
-  //     if (token) {
-  //       navigate('/');
-  //     }
-  //   }, [token]);
+  useEffect(() => {
+    if (token) {
+      navigate('/');
+    }
+  }, [token]);
 
   const isValidEmail = (email) => {
     // Basic email validation using regex
@@ -83,7 +84,6 @@ const Register = ({ token }) => {
 
   return (
     <div className={classes.container}>
-        {console.log(name)}
       <div className={classes.image}></div>
       <div className={classes.box}>
         <div className={classes.containerbox}>
@@ -120,12 +120,22 @@ const Register = ({ token }) => {
           </div>
           <div className={classes.group}>
             <p className={classes.text}>
-              Department ID
+              Department
             </p>
-            <input className={classes.input} type="text" onChange={(e) => setDepartmentId(e.target.value)} />
+            <select className={classes.input} value={selectedOption} onChange={(e) => setSelectedOption(e.target.value)}>
+              {/* Mapping data options menjadi option elements */}
+              {department.map((option) => (
+                <option key={option.id} value={option.id}>
+                  {option.name}
+                </option>
+              ))}
+            </select>
           </div>
           <div onClick={onSubmit} className={classes.button}>
             <FormattedMessage id="app_text_register" />
+          </div>
+          <div onClick={() => navigate('/login')} className={classes.noacc}>
+            <FormattedMessage id="app_text_haveacc" />
           </div>
         </div>
       </div>
@@ -136,10 +146,12 @@ const Register = ({ token }) => {
 
 Register.prototypes = {
   token: PropTypes.string,
+  department: PropTypes.array,
 };
 
 const mapStateToProps = createStructuredSelector({
   token: (state) => state.client.token,
+  department: selectDepartment,
 });
 
 export default connect(mapStateToProps)(Register);

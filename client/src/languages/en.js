@@ -31,6 +31,9 @@ export default {
   app_placeholder_search: 'Search',
   app_no_data: 'Data Empty',
   app_no_data_filter: 'No matching data found',
+  app_text_noaccount: 'No Account? Register here',
+  app_text_haveacc: 'Already have an account? Login here',
+
 
   app_text_department: 'Department',
   app_text_department_create: 'Create Department',
