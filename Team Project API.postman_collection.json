@@ -1,9 +1,9 @@
 {
 	"info": {
-		"_postman_id": "360256a3-42fb-429b-9250-c29248827a93",
+		"_postman_id": "cf4d5122-0b7b-4580-bc91-0f7416346315",
 		"name": "Team Project API",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "32533899"
+		"_exporter_id": "23640195"
 	},
 	"item": [
 		{
@@ -15,14 +15,75 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "localhost:8000/employee/all",
+							"raw": "localhost:5000/api/employee/employeeList",
 							"host": [
 								"localhost"
 							],
-							"port": "8000",
+							"port": "5000",
 							"path": [
+								"api",
 								"employee",
-								"all"
+								"employeeList"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET Profile by token",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbXBsb3llZUlkIjo4LCJpc0FkbWluIjpmYWxzZSwiaWF0IjoxNzA3NjYyNjQ1LCJleHAiOjE3MDc3NDkwNDV9.W3DFbMmjtdlwOXjbMBzJrwOipYQHv8qwmgcQ3t1wU90",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:5000/api/auth/getUser",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"auth",
+								"getUser"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET Team Profile by token",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbXBsb3llZUlkIjo4LCJpc0FkbWluIjpmYWxzZSwiaWF0IjoxNzA3NjYyNjQ1LCJleHAiOjE3MDc3NDkwNDV9.W3DFbMmjtdlwOXjbMBzJrwOipYQHv8qwmgcQ3t1wU90",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:5000/api/auth/getMyTeamProject",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"auth",
+								"getMyTeamProject"
 							]
 						}
 					},
@@ -44,12 +105,13 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "localhost:8000/employee/detail",
+							"raw": "localhost:5000/api/employee/detail",
 							"host": [
 								"localhost"
 							],
-							"port": "8000",
+							"port": "5000",
 							"path": [
+								"api",
 								"employee",
 								"detail"
 							]
@@ -162,11 +224,11 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "localhost:8080/api/department/departmentList",
+							"raw": "localhost:5000/api/department/departmentList",
 							"host": [
 								"localhost"
 							],
-							"port": "8080",
+							"port": "5000",
 							"path": [
 								"api",
 								"department",
@@ -182,16 +244,16 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "localhost:8080/api/department/detail/12",
+							"raw": "localhost:5000/api/department/detail/123",
 							"host": [
 								"localhost"
 							],
-							"port": "8080",
+							"port": "5000",
 							"path": [
 								"api",
 								"department",
 								"detail",
-								"12"
+								"123"
 							]
 						}
 					},
@@ -240,7 +302,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n}",
+							"raw": "{\r\n    \"name\" : \"test3\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -248,20 +310,16 @@
 							}
 						},
 						"url": {
-							"raw": "localhost:8000/department/update?id=2",
+							"raw": "localhost:5000/api/department/update/12",
 							"host": [
 								"localhost"
 							],
-							"port": "8000",
+							"port": "5000",
 							"path": [
+								"api",
 								"department",
-								"update"
-							],
-							"query": [
-								{
-									"key": "id",
-									"value": "2"
-								}
+								"update",
+								"12"
 							]
 						}
 					},
@@ -299,14 +357,15 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "localhost:8000/project/all",
+							"raw": "localhost:5000/api/project/projectList",
 							"host": [
 								"localhost"
 							],
-							"port": "8000",
+							"port": "5000",
 							"path": [
+								"api",
 								"project",
-								"all"
+								"projectList"
 							]
 						}
 					},
@@ -318,20 +377,16 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "localhost:8000/project/detail?id=1",
+							"raw": "localhost:5000/api/project/detail/2",
 							"host": [
 								"localhost"
 							],
-							"port": "8000",
+							"port": "5000",
 							"path": [
+								"api",
 								"project",
-								"detail"
-							],
-							"query": [
-								{
-									"key": "id",
-									"value": "1"
-								}
+								"detail",
+								"2"
 							]
 						}
 					},
@@ -344,7 +399,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"name\": \"Mancing\"\r\n}",
+							"raw": "{\r\n    \"name\": \"Mancingers\",\r\n    \"description\": \"Membuat sebuah yyy\",\r\n    \"startDate\": \"2024-02-14\",\r\n    \"endDate\": \"2024-03-14\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -352,12 +407,13 @@
 							}
 						},
 						"url": {
-							"raw": "localhost:8000/project/create",
+							"raw": "localhost:5000/api/project/create",
 							"host": [
 								"localhost"
 							],
-							"port": "8000",
+							"port": "5000",
 							"path": [
+								"api",
 								"project",
 								"create"
 							],
@@ -379,7 +435,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"name\" : \"Bootcsampe\"\r\n}",
+							"raw": "{\r\n    \"name\": \"Mancingers\",\r\n    \"description\": \"Membuat sebuah yyy\",\r\n    \"startDate\": \"2024-02-14\",\r\n    \"endDate\": \"2024-03-14\",\r\n    \"status\": 1\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -387,20 +443,16 @@
 							}
 						},
 						"url": {
-							"raw": "localhost:8000/project/update?id=1",
+							"raw": "localhost:5000/api/project/update/1",
 							"host": [
 								"localhost"
 							],
-							"port": "8000",
+							"port": "5000",
 							"path": [
+								"api",
 								"project",
-								"update"
-							],
-							"query": [
-								{
-									"key": "id",
-									"value": "1"
-								}
+								"update",
+								"1"
 							]
 						}
 					},
@@ -412,20 +464,16 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "localhost:8000/project/delete?id=",
+							"raw": "localhost:5000/api/project/delete/4",
 							"host": [
 								"localhost"
 							],
-							"port": "8000",
+							"port": "5000",
 							"path": [
+								"api",
 								"project",
-								"delete"
-							],
-							"query": [
-								{
-									"key": "id",
-									"value": ""
-								}
+								"delete",
+								"4"
 							]
 						}
 					},
@@ -434,10 +482,10 @@
 			]
 		},
 		{
-			"name": "EmployeeProject",
+			"name": "Team-Project",
 			"item": [
 				{
-					"name": "GET employee-project",
+					"name": "GET team-project",
 					"request": {
 						"auth": {
 							"type": "bearer",
@@ -452,21 +500,22 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "localhost:8000/employeeproject/all",
+							"raw": "localhost:5000/api/team-project/list",
 							"host": [
 								"localhost"
 							],
-							"port": "8000",
+							"port": "5000",
 							"path": [
-								"employeeproject",
-								"all"
+								"api",
+								"team-project",
+								"list"
 							]
 						}
 					},
 					"response": []
 				},
 				{
-					"name": "GET detail employeeproject",
+					"name": "GET detail team-project",
 					"request": {
 						"auth": {
 							"type": "bearer",
@@ -481,43 +530,29 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "localhost:8000/employeeproject/detail?id=1",
+							"raw": "localhost:5000/api/team-project/detail/s",
 							"host": [
 								"localhost"
 							],
-							"port": "8000",
+							"port": "5000",
 							"path": [
-								"employeeproject",
-								"detail"
-							],
-							"query": [
-								{
-									"key": "id",
-									"value": "1"
-								}
+								"api",
+								"team-project",
+								"detail",
+								"s"
 							]
 						}
 					},
 					"response": []
 				},
 				{
-					"name": "CREATE employeeproject",
+					"name": "CREATE team-project",
 					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbXBsb3llZUlkIjoyLCJpYXQiOjE3MDY4NjA2NDMsImV4cCI6MTcwNjk0NzA0M30.hyVK8TRgFGkhp3aQOOVp00gITcZu6bXsHIfn7BOrFoA",
-									"type": "string"
-								}
-							]
-						},
 						"method": "POST",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"projectId\" : 1,\r\n    \"role\" : \"berkebun teh\"\r\n}",
+							"raw": "{\r\n    \"employeeId\" : 8,\r\n    \"projectId\" : 1,\r\n    \"name\" : \"Campaign Tester\",\r\n    \"role\" : \"berkebun teh\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -525,13 +560,14 @@
 							}
 						},
 						"url": {
-							"raw": "localhost:8000/employeeproject/create",
+							"raw": "localhost:5000/api/team-project/create",
 							"host": [
 								"localhost"
 							],
-							"port": "8000",
+							"port": "5000",
 							"path": [
-								"employeeproject",
+								"api",
+								"team-project",
 								"create"
 							],
 							"query": [
@@ -546,7 +582,7 @@
 					"response": []
 				},
 				{
-					"name": "update employeeproject",
+					"name": "update team-project",
 					"request": {
 						"auth": {
 							"type": "bearer",
@@ -562,7 +598,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"role\" : \"tesst\",\r\n    \"projectId\": 1\r\n}",
+							"raw": "{\r\n    \"employeeId\" : 7,\r\n    \"projectId\": 12,\r\n    \"name\": \"Software Engineering\",\r\n    \"role\": \"Software Engineering\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -570,27 +606,23 @@
 							}
 						},
 						"url": {
-							"raw": "localhost:8000/employeeproject/update?id=2",
+							"raw": "localhost:5000/api/team-project/update/1",
 							"host": [
 								"localhost"
 							],
-							"port": "8000",
+							"port": "5000",
 							"path": [
-								"employeeproject",
-								"update"
-							],
-							"query": [
-								{
-									"key": "id",
-									"value": "2"
-								}
+								"api",
+								"team-project",
+								"update",
+								"1"
 							]
 						}
 					},
 					"response": []
 				},
 				{
-					"name": "Delete employeeproject",
+					"name": "Delete team-project",
 					"request": {
 						"auth": {
 							"type": "bearer",
@@ -614,20 +646,16 @@
 							}
 						},
 						"url": {
-							"raw": "localhost:8000/employeeproject/delete?id=1",
+							"raw": "localhost:5000/api/team-project/delete/2",
 							"host": [
 								"localhost"
 							],
-							"port": "8000",
+							"port": "5000",
 							"path": [
-								"employeeproject",
-								"delete"
-							],
-							"query": [
-								{
-									"key": "id",
-									"value": "1"
-								}
+								"api",
+								"team-project",
+								"delete",
+								"2"
 							]
 						}
 					},
@@ -692,11 +720,11 @@
 					}
 				},
 				"url": {
-					"raw": "localhost:8080/api/auth/login",
+					"raw": "localhost:5000/api/auth/login",
 					"host": [
 						"localhost"
 					],
-					"port": "8080",
+					"port": "5000",
 					"path": [
 						"api",
 						"auth",
