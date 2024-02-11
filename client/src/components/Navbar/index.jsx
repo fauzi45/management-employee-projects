@@ -16,7 +16,7 @@ import { setLocale, setTheme } from '@containers/App/actions';
 import Dropdown from '@components/Dropdown';
 
 import classes from './style.module.scss';
-import { selectToken } from '@pages/Login/selectors';
+import { selectToken } from '@containers/Client/selectors';
 
 const Navbar = ({ title, locale, theme, token }) => {
   const dispatch = useDispatch();

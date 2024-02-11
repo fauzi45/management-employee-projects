@@ -1,21 +1,28 @@
 import classes from './style.module.scss';
 import { FormattedMessage } from 'react-intl';
 import { useNavigate } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
-import { setLogin, setToken } from '@pages/Login/actions';
+import { useDispatch,connect } from 'react-redux';
 
-const Dropdown = () => {
+import PropTypes from 'prop-types';
+
+import { createStructuredSelector } from 'reselect';
+import { SelectProfile } from '@pages/Admin/Profile/selector';
+import { setLogin, setToken } from '@containers/Client/actions';
+
+const Dropdown = ({ profile }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const logout = () => {
     dispatch(setLogin(false));
     dispatch(setToken(null));
   };
+
   return (
     <div>
+      
       <ul className={classes.dropdownProfile}>
-        <li className={classes.baris} onClick={() => navigate('/profile')}>
-          <p>Profile</p>
+        <li className={classes.baris}>
+          <p>Halo, {profile.name}</p>
         </li>
         <li className={classes.baris} onClick={() => navigate('/admin/department')}>
           <p><FormattedMessage id="app_text_department" /></p>
@@ -35,4 +42,8 @@ const Dropdown = () => {
   );
 };
 
-export default Dropdown;
+const mapStateToProps = createStructuredSelector({
+  profile: SelectProfile,
+});
+
+export default connect(mapStateToProps)(Dropdown);
