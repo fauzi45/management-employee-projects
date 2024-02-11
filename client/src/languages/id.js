@@ -48,4 +48,10 @@ export default {
   app_text_employee_update: 'Ubah Pegawai',
 
   app_text_team_project: 'Projek Tim',
+  app_text_team_project_create: 'Buah Projek Tim',
+  app_text_team_project_update: 'Ubah Projek Tim',
+  app_text_team_project_name_team: 'Nama Tim',
+  app_text_team_project_name_employee: 'Nama Pegawai',
+  app_text_team_project_name_project: 'Nama Projek',
+  app_text_team_project_role: 'Peran',
 };

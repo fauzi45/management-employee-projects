@@ -48,5 +48,11 @@ export default {
   app_text_employee_create: 'Create Employee',
   app_text_employee_update: 'Update Employee',
 
-  app_text_team_project: 'Team Project'
+  app_text_team_project: 'Team Project',
+  app_text_team_project_create: 'Create Team Project',
+  app_text_team_project_update: 'Update Team Project',
+  app_text_team_project_name_team: 'Team Name',
+  app_text_team_project_name_employee: 'Employee Name',
+  app_text_team_project_name_project: 'Project Name',
+  app_text_team_project_role: 'Role',
 };

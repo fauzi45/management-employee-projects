@@ -1,7 +1,7 @@
 import MainLayout from '@layouts/MainLayout';
 import Department from '@pages/Admin/Department';
 import Employee from '@pages/Admin/Employee';
-import EmployeeProject from '@pages/Admin/TeamProject';
+import TeamProject from '@pages/Admin/TeamProject';
 import Project from '@pages/Admin/Project';
 
 import Home from '@pages/Home';
@@ -11,6 +11,7 @@ import Register from '@pages/Register';
 import CreateDepartment from '@pages/Admin/Department/components/FormDepartment';
 import FormProject from '@pages/Admin/Project/components/FormProject';
 import FormEmployee from '@pages/Admin/Employee/components/FormEmployee';
+import FormTeamProject from '@pages/Admin/TeamProject/components/FormTeamProject';
 
 const routes = [
   {
@@ -88,7 +89,21 @@ const routes = [
     path: '/admin/team-project',
     name: 'TeamProject',
     protected: true,
-    component: EmployeeProject,
+    component: TeamProject,
+    layout: MainLayout,
+  },
+  {
+    path: '/admin/team-project/form',
+    name: 'Form Team Project',
+    protected: true,
+    component: FormTeamProject,
+    layout: MainLayout,
+  },
+  {
+    path: '/admin/team-project/form/:id',
+    name: 'Form Project',
+    protected: true,
+    component: FormTeamProject,
     layout: MainLayout,
   },
   {

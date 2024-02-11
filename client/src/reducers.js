@@ -12,7 +12,8 @@ import projectReducer,{ storedKey as storedProject} from '@pages/Admin/Project/r
 import createNewProject,{ storedKey as storedNewProject} from '@pages/Admin/Project/components/FormProject/reducer';
 import employeeReducer,{ storedKey as storedDataEmployee} from '@pages/Admin/Employee/reducer';
 import profileReducer,{ storedKey as storedProfile} from '@pages/Admin/Profile/reducer';
-import createNewEmployee,{ storedKey as storedNewEmployee} from '@pages/Admin/Employee/components/FormEmployee/reducer';
+import teamProjectReducer,{ storedKey as storedTeamProject} from '@pages/Admin/TeamProject/reducer';
+import createNewEmployeeReducer,{ storedKey as storedNewEmployee} from '@pages/Admin/Employee/components/FormEmployee/reducer';
 
 const storedReducers = {
   app: { reducer: appReducer, whitelist: storedAppState },
@@ -27,7 +28,9 @@ const storedReducers = {
   newProject: {reducer: createNewProject, whitelist: storedNewProject},
 
   employeeData: { reducer: employeeReducer, whitelist: storedDataEmployee },
-  newEmployee: {reducer: createNewEmployee, whitelist: storedNewEmployee},
+  newEmployee: {reducer: createNewEmployeeReducer, whitelist: storedNewEmployee},
+
+  teamProject: { reducer: teamProjectReducer, whitelist: storedTeamProject },
 };
 
 const temporaryReducers = {

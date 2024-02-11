@@ -26,6 +26,12 @@ const urls = {
   detailEmployee: 'employee/detail',
   updateEmployee: 'employee/update',
   deleteEmployee: 'employee/delete',
+
+  allTeamProject: 'team-project/list',
+  createTeamProject: 'team-project/create',
+  detailTeamProject: 'team-project/detail',
+  updateTeamProject: 'team-project/update',
+  deleteTeamProject: 'team-project/delete',
 };
 
 export const callAPI = async (endpoint, method, header = {}, params = {}, data = {}) => {
@@ -75,3 +81,9 @@ export const fetchDataEmployee = () => callAPI(urls.allEmployee, 'GET');
 export const detailEmployee = (id) => callAPI(`${urls.detailEmployee}/${id}`, 'GET');
 export const updateEmployee = (id, data) => callAPI(`${urls.updateEmployee}/${id}`, 'PUT', {}, {}, data);
 export const deleteEmployee = (id) => callAPI(`${urls.deleteEmployee}/${id}`, 'DELETE');
+
+export const fetchTeamProject = () => callAPI(urls.allTeamProject, 'GET');
+export const newTeamProject = (data) => callAPI(urls.createTeamProject, 'POST', {}, {}, data);
+export const detailTeamProject = (id) => callAPI(`${urls.detailTeamProject}/${id}`, 'GET');
+export const updateTeamProject = (id, data) => callAPI(`${urls.updateTeamProject}/${id}`, 'PUT', {}, {}, data);
+export const deleteTeamProject = (id) => callAPI(`${urls.deleteTeamProject}/${id}`, 'DELETE');

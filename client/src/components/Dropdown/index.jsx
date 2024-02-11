@@ -33,6 +33,9 @@ const Dropdown = ({ profile }) => {
         <li className={classes.baris} onClick={() => navigate('/admin/project')}>
         <p><FormattedMessage id="app_text_project" /></p>
         </li>
+        <li className={classes.baris} onClick={() => navigate('/admin/team-project')}>
+        <p><FormattedMessage id="app_text_team_project" /></p>
+        </li>
         <li style={{ border: '1px solid #A8A8A8', width: '100%' }}></li>
         <li className={classes.baris} onClick={logout}>
           <p>Logout</p>

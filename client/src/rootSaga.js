@@ -10,6 +10,7 @@ import newProjectSaga from '@pages/Admin/Project/components/FormProject/saga';
 import employeeSaga from '@pages/Admin/Employee/saga';
 import profileSaga from '@pages/Admin/Profile/saga';
 import newEmployeeSaga from '@pages/Admin/Employee/components/FormEmployee/saga';
+import teamProjectSaga from '@pages/Admin/TeamProject/saga';
 
 export default function* rootSaga() {
   yield all([
@@ -25,6 +26,8 @@ export default function* rootSaga() {
     newProjectSaga(),
 
     employeeSaga(),
-    newEmployeeSaga()
+    newEmployeeSaga(),
+
+    teamProjectSaga()
   ]);
 }
