@@ -6,7 +6,6 @@ const AuthHelper = require("../helpers/authHelper");
 const GeneralHelper = require("../helpers/generalHelper");
 const { decryptData } = require("../../utils/decryptionHelper");
 const fileName = "server/api/auth.js";
-const db = require("../../models");
 const register = async (request, reply) => {
   try {
     const { name, email, password, position, departmentId } = request.body;
