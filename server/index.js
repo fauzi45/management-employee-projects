@@ -11,6 +11,7 @@ const Auths = require('./server/api/auth');
 const Employee = require('./server/api/employee');
 const Department = require('./server/api/departments');
 const Project = require('./server/api/project');
+const TeamProject = require('./server/api/teamproject');
 dotenv.config();
 
 // Middleware
@@ -77,6 +78,7 @@ app.use('/api/auth', Auths);
 app.use('/api/employee', Employee);
 app.use('/api/department', Department);
 app.use('/api/project', Project);
+app.use('/api/team-project', TeamProject);
 // Sys ping api 
 app.get('/sys/ping', (req, res) => {
   req.startTime = process.hrtime();
