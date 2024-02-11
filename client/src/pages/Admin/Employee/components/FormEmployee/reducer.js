@@ -7,7 +7,7 @@ export const initialState = {
 
 export const storedKey = ['data'];
 
-const createNewEmployee = (state = initialState, action) =>
+const createNewEmployeeReducer = (state = initialState, action) =>
   produce(state, (draft) => {
     switch (action.type) {
       case SET_DETAIL_EMPLOYEE:
@@ -18,4 +18,4 @@ const createNewEmployee = (state = initialState, action) =>
     }
   });
 
-export default createNewEmployee;
+export default createNewEmployeeReducer;
