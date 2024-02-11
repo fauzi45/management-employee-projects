@@ -85,7 +85,7 @@ const Employee = ({ employee, token }) => {
   };
 
   const handleUpdate = (id) => {
-    navigate(`/admin/department/form/${id}`)
+    navigate(`/admin/employee/form/${id}`)
   };
 
   return (
