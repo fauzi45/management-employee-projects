@@ -21,6 +21,10 @@ const urls = {
   deleteProject: 'project/delete',
 
   allEmployee: 'employee/employeeList',
+  createEmployee: 'employee/create',
+  detailEmployee: 'employee/detail',
+  updateEmployee: 'employee/update',
+  deleteEmployee: 'employee/delete',
 };
 
 export const callAPI = async (endpoint, method, header = {}, params = {}, data = {}) => {
@@ -65,3 +69,4 @@ export const updateProject = (id, data) => callAPI(`${urls.updateProject}/${id}`
 export const deleteProject = (id) => callAPI(`${urls.deleteProject}/${id}`, 'DELETE');
 
 export const fetchDataEmployee = () => callAPI(urls.allEmployee, 'GET');
+export const deleteEmployee = (id) => callAPI(`${urls.deleteEmployee}/${id}`, 'DELETE');
