@@ -12,6 +12,10 @@ module.exports = (sequelize, DataTypes) => {
         foreignKey: "departmentId",
         as: "department",
       });
+      Employees.hasMany(models.TeamProjects, {
+        as: "project",
+        foreignKey: "employeeId",
+      })
     }
   }
   Employees.init(
