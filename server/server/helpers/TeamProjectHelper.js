@@ -11,7 +11,13 @@ const getTeamProjectListHelper = async () => {
         {
           model: db.Employees,
           as: "employee",
-          include: "department",
+          include: [
+            {
+              model: db.Departments,
+              as: "department",
+              attributes: { exclude: ["createdAt", "updatedAt"] },
+            },
+          ],
           attributes: {
             exclude: ["createdAt", "updatedAt"],
           },
@@ -47,7 +53,13 @@ const getTeamProjectDetailHelper = async (id) => {
         {
           model: db.Employees,
           as: "employee",
-          include: "department",
+          include: [
+            {
+              model: db.Departments,
+              as: "department",
+              attributes: { exclude: ["createdAt", "updatedAt"] },
+            },
+          ],
           attributes: {
             exclude: ["createdAt", "updatedAt"],
           },
@@ -128,10 +140,10 @@ const updateTeamProjectHelper = async (
       where: { id: projectId },
     });
     if (_.isEmpty(checkTeamProject)) {
-        return Promise.reject(
-          Boom.badRequest("Team Project with this id is doesn't exist")
-        );
-      }
+      return Promise.reject(
+        Boom.badRequest("Team Project with this id is doesn't exist")
+      );
+    }
     if (_.isEmpty(dataEmployee)) {
       return Promise.reject(
         Boom.badRequest("Employee with this id doesn't exist")
@@ -142,7 +154,7 @@ const updateTeamProjectHelper = async (
         Boom.badRequest("Project with this id doesn't exist")
       );
     }
-    
+
     await db.TeamProjects.update(
       {
         employeeId: employeeId

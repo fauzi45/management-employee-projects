@@ -89,7 +89,7 @@ const login = async (dataObject) => {
   }
 };
 
-const getUser = async (dataEmployee) => {
+const getUserHelper = async (dataEmployee) => {
   try {
     const checkUser = await db.Employees.findOne({
       where: {
@@ -106,8 +106,52 @@ const getUser = async (dataEmployee) => {
   }
 };
 
+const getMyTeamProjectHelper = async (dataEmployee) => {
+  try {
+    const checkTeamProject = await db.TeamProjects.findAll({
+      include: [
+        {
+          model: db.Employees,
+          as: "employee",
+          include: [
+            {
+              model: db.Departments,
+              as: "department",
+              attributes: { exclude: ["createdAt", "updatedAt"] },
+            },
+          ],
+          attributes: {
+            exclude: ["createdAt", "updatedAt"],
+          },
+        },
+        {
+          model: db.Projects,
+          as: "project",
+          attributes: {
+            exclude: ["createdAt", "updatedAt"],
+          },
+        },
+      ],
+      attributes: {
+        exclude: ["createdAt", "updatedAt"],
+      },
+      where: {
+        employeeId: dataEmployee.employeeId,
+      },
+    });
+    if (_.isEmpty(checkTeamProject)) {
+      return Promise.reject(Boom.notFound("TEAM_PROJECT_NOT_FOUND"));
+    }
+    return Promise.resolve(checkTeamProject);
+  } catch (err) {
+    console.log([fileName, "getMyTeamProject", "ERROR"], { info: `${err}` });
+    return Promise.reject(GeneralHelper.errorResponse(err));
+  }
+};
+
 module.exports = {
   registerUser,
   login,
-  getUser
+  getUserHelper,
+  getMyTeamProjectHelper,
 };
