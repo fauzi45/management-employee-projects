@@ -65,6 +65,7 @@ const Register = ({ token, department }) => {
           setEmail('');
           setPassword('');
           navigate('/login');
+          dispatch(setEmployee(null));
         })
       );
     }
@@ -123,7 +124,6 @@ const Register = ({ token, department }) => {
               Department
             </p>
             <select className={classes.input} value={selectedOption} onChange={(e) => setSelectedOption(e.target.value)}>
-              {/* Mapping data options menjadi option elements */}
               {department.map((option) => (
                 <option key={option.id} value={option.id}>
                   {option.name}
