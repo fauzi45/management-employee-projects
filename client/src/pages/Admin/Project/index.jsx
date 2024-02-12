@@ -34,6 +34,7 @@ import { selectProject } from './selector';
 
 import toast, { Toaster } from 'react-hot-toast';
 import { selectToken } from '@containers/Client/selectors';
+import { jwtDecode } from 'jwt-decode';
 
 const Project = ({ project, token }) => {
   const intl = useIntl();
@@ -53,11 +54,12 @@ const Project = ({ project, token }) => {
     setData(project);
   }, [project]);
 
-  // useEffect(() => {
-  //   if (!token) {
-  //     navigate('/login');
-  //   }
-  // }, [token]);
+  useEffect(() => {
+    const dataToken = jwtDecode(token);
+    if (dataToken.isAdmin === false) {
+      navigate('/user'); // Jika user adalah admin, navigasi ke halaman admin
+    }
+  }, [navigate]);
 
 
   const handleChangePage = (event, newPage) => {

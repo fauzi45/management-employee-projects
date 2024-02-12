@@ -32,8 +32,11 @@ import { deleteTeamProject, getFetchTeamProject } from './actions';
 
 import { Toaster } from 'react-hot-toast';
 import { useNavigate } from 'react-router-dom';
+import { jwtDecode } from 'jwt-decode';
+import { selectToken } from '@containers/Client/selectors';
 
-const TeamProject = ({ teamProject }) => {
+
+const TeamProject = ({ teamProject, token }) => {
   const intl = useIntl();
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -63,6 +66,13 @@ const TeamProject = ({ teamProject }) => {
   useEffect(() => {
     dispatch(getFetchTeamProject());
   }, [dispatch]);
+
+  useEffect(() => {
+    const dataToken = jwtDecode(token);
+    if (dataToken.isAdmin === false) {
+      navigate('/user'); // Jika user adalah admin, navigasi ke halaman admin
+    }
+  }, [navigate]);
 
   useEffect(() => {
     setData(teamProject);
@@ -184,10 +194,12 @@ const TeamProject = ({ teamProject }) => {
 
 TeamProject.propTypes = {
   teamProject: PropTypes.array,
+  token: PropTypes.string
 };
 
 const mapStateToProps = createStructuredSelector({
   teamProject: selectTeamProject,
+  token: selectToken
 });
 
 export default connect(mapStateToProps)(TeamProject);

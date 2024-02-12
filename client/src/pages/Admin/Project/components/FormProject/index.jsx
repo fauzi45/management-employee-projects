@@ -3,6 +3,8 @@ import { connect, useDispatch } from 'react-redux';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { useNavigate, useParams } from 'react-router-dom';
 
+import PropTypes from 'prop-types';
+
 import Button from '@mui/material/Button';
 
 import classes from './style.module.scss';
@@ -12,8 +14,10 @@ import toast, { Toaster } from 'react-hot-toast';
 import { createStructuredSelector } from 'reselect';
 import { selectProjectDetail } from './selector';
 import { addNewProject, getDetailProject, setDetailProject, setUpdateProject } from './actions';
+import { selectToken } from '@containers/Client/selectors';
+import { jwtDecode } from 'jwt-decode';
 
-const FormProject = ({ projectDetail }) => {
+const FormProject = ({ projectDetail, token }) => {
   const intl = useIntl();
   const { id } = useParams();
   const navigate = useNavigate();
@@ -27,6 +31,13 @@ const FormProject = ({ projectDetail }) => {
   });
 
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    const dataToken = jwtDecode(token);
+    if (dataToken.isAdmin === false) {
+      navigate('/user'); // Jika user adalah admin, navigasi ke halaman admin
+    }
+  }, [navigate]);
 
   useEffect(() => {
     if (id) {
@@ -176,8 +187,14 @@ const FormProject = ({ projectDetail }) => {
   );
 };
 
+FormProject.propTypes = {
+  projectDetail: PropTypes.array,
+  token: PropTypes.string,
+};
+
 const mapStateToProps = createStructuredSelector({
   projectDetail: selectProjectDetail,
+  token: selectToken
 });
 
 export default connect(mapStateToProps)(FormProject);

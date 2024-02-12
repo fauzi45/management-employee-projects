@@ -15,8 +15,10 @@ import PropTypes from 'prop-types';
 
 import { createStructuredSelector } from 'reselect';
 import { selectDepartmentDetail } from './selector';
+import { selectToken } from '@containers/Client/selectors';
+import { jwtDecode } from 'jwt-decode';
 
-const FormDepartment = ({ departmentDetail }) => {
+const FormDepartment = ({ departmentDetail, token }) => {
   const intl = useIntl();
   const { id } = useParams();
   const navigate = useNavigate();
@@ -25,6 +27,13 @@ const FormDepartment = ({ departmentDetail }) => {
   });
 
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    const dataToken = jwtDecode(token);
+    if (dataToken.isAdmin === false) {
+      navigate('/user'); // Jika user adalah admin, navigasi ke halaman admin
+    }
+  }, [navigate]);
 
   useEffect(() => {
     if (id) {
@@ -101,10 +110,12 @@ const FormDepartment = ({ departmentDetail }) => {
 
 FormDepartment.prototypes = {
   departmentDetail: PropTypes.array,
+  token: PropTypes.string
 };
 
 const mapStateToProps = createStructuredSelector({
   departmentDetail: selectDepartmentDetail,
+  token: selectToken
 });
 
 export default connect(mapStateToProps)(FormDepartment);

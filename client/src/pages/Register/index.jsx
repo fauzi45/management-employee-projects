@@ -15,6 +15,7 @@ import { eye } from 'react-icons-kit/feather/eye';
 
 import { setEmployee } from './action';
 import { selectDepartment } from '@pages/Admin/Department/selector';
+import { getFetchDepartment } from '@pages/Admin/Department/actions';
 
 const Register = ({ token, department }) => {
   const [type, setType] = useState('password');
@@ -36,6 +37,10 @@ const Register = ({ token, department }) => {
       setType('password');
     }
   };
+
+  useEffect(() => {
+    dispatch(getFetchDepartment());
+  }, [dispatch]);
 
   const onSubmit = () => {
     if (!name) {

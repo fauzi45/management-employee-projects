@@ -43,17 +43,17 @@ const Employee = ({ employee, token }) => {
   const [rowsPerPage, setRowsPerPage] = useState(10);
   const [searchedVal, setSearchedVal] = useState('');
   const [data, setData] = useState([]);
-  const decoded = jwtDecode(token);
+  const dataToken = jwtDecode(token);
 
   useEffect(() => {
     dispatch(getFetchEmployee());
   }, [dispatch]);
 
   useEffect(() => {
-    if (!token) {
-      navigate('/login');
+    if (dataToken.isAdmin === false) {
+      navigate('/user'); // Jika user adalah admin, navigasi ke halaman admin
     }
-  }, [token]);
+  }, [navigate]);
 
   useEffect(() => {
     setData(employee);
@@ -139,11 +139,12 @@ const Employee = ({ employee, token }) => {
                   .map((row, index) => (
                     <TableRow hover role="checkbox" tabIndex={-1} key={row.id}>
                       <TableCell align="center">{page * rowsPerPage + index + 1}</TableCell>
-                      <TableCell align="center">{row.name} {row.id === decoded.employeeId ? "(You)" : ""}</TableCell>
+                      <TableCell align="center">{row.name} {row.id === dataToken.employeeId ? "(You)" : ""}</TableCell>
                       <TableCell align="center">{row.email}</TableCell>
                       <TableCell align="center">{row.position}</TableCell>
+                      <TableCell align="center">{row.department.name}</TableCell>
                       <TableCell align="center">
-                        {row.id === decoded.employeeId ? "" :
+                        {row.id === dataToken.employeeId ? "" :
                           <IconButton aria-label="delete" onClick={() => handleDelete(row.id)}>
                             <DeleteIcon />
                           </IconButton>}

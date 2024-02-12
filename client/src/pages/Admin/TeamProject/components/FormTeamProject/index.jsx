@@ -3,6 +3,8 @@ import { connect, useDispatch } from 'react-redux';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { useNavigate, useParams } from 'react-router-dom';
 
+import PropTypes from 'prop-types';
+
 import Button from '@mui/material/Button';
 
 import classes from './style.module.scss';
@@ -13,11 +15,14 @@ import { createStructuredSelector } from 'reselect';
 import { addNewTeamProject, setUpdateTeamProject } from './actions';
 import { selectProject } from '@pages/Admin/Project/selector';
 import { selectEmployee } from '@pages/Admin/Employee/selector';
+import { selectToken } from '@containers/Client/selectors';
+import { jwtDecode } from 'jwt-decode';
 
-const FormTeamProject = ({ project, employee }) => {
+const FormTeamProject = ({ project, employee,token }) => {
   const intl = useIntl();
   const { id } = useParams();
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const [formData, setFormData] = useState({
     employeeId: '',
     projectId: '',
@@ -25,7 +30,13 @@ const FormTeamProject = ({ project, employee }) => {
     role: '',
   });
 
-  const dispatch = useDispatch();
+  useEffect(() => {
+    const dataToken = jwtDecode(token);
+    if (dataToken.isAdmin === false) {
+      navigate('/user'); // Jika user adalah admin, navigasi ke halaman admin
+    }
+  }, [navigate]);
+
 
   // useEffect(() => {
   //   if (id) {
@@ -155,9 +166,16 @@ const FormTeamProject = ({ project, employee }) => {
   );
 };
 
+FormTeamProject.propTypes = {
+  project: PropTypes.array,
+  employee: PropTypes.array,
+  token: PropTypes.string,
+};
+
 const mapStateToProps = createStructuredSelector({
   project: selectProject,
   employee: selectEmployee,
+  token: selectToken
 });
 
 export default connect(mapStateToProps)(FormTeamProject);

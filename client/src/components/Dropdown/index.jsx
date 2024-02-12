@@ -9,6 +9,7 @@ import { createStructuredSelector } from 'reselect';
 import { SelectProfile } from '@pages/Admin/Profile/selector';
 import { setLogin, setToken } from '@containers/Client/actions';
 import { selectToken } from '@containers/Client/selectors';
+import { setProfile } from '@pages/Admin/Profile/actions';
 
 const Dropdown = ({ profile, token }) => {
   const dispatch = useDispatch();
@@ -17,6 +18,7 @@ const Dropdown = ({ profile, token }) => {
   const logout = () => {
     dispatch(setLogin(false));
     dispatch(setToken(null));
+    dispatch(setProfile(null));
   };
 
   return (

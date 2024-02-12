@@ -4,7 +4,7 @@ import { setLoading, showPopup } from '@containers/App/actions';
 import { DO_LOGIN } from './constants';
 import { setLogin, setToken } from '@containers/Client/actions';
 
-function* doLogin({formData}) {
+function* doLogin({formData,cb}) {
     setLoading(true);
     try {
       const response = yield call(login, formData);
@@ -13,7 +13,7 @@ function* doLogin({formData}) {
       yield put(setToken(token));
       cb();
     } catch (error) {
-        yield put(showPopup(error.info));
+        console.log(error)
     }
     setLoading(false);
   }

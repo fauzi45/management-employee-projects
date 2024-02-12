@@ -32,8 +32,9 @@ import { deleteDepartment, getFetchDepartment } from './actions';
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import toast, { Toaster } from 'react-hot-toast';
+import { Toaster } from 'react-hot-toast';
 import { selectToken } from '@containers/Client/selectors';
+import { jwtDecode } from 'jwt-decode';
 
 const Department = ({ department, token }) => {
   const intl = useIntl();
@@ -43,7 +44,7 @@ const Department = ({ department, token }) => {
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(10);
   const [searchedVal, setSearchedVal] = useState('');
-  
+
 
   useEffect(() => {
     dispatch(getFetchDepartment());
@@ -54,10 +55,11 @@ const Department = ({ department, token }) => {
   }, [department]);
 
   useEffect(() => {
-    if (!token) {
-      navigate('/login');
+    const dataToken = jwtDecode(token);
+    if (dataToken.isAdmin === false) {
+      navigate('/user'); // Jika user adalah admin, navigasi ke halaman admin
     }
-  }, [token]);
+  }, [navigate]);
 
   const handleChangePage = (event, newPage) => {
     setPage(newPage);

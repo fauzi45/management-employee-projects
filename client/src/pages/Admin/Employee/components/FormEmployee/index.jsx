@@ -16,8 +16,10 @@ import { selectEmployeeDetail } from './selector';
 import { selectDepartment } from '@pages/Admin/Department/selector';
 import { addNewEmployee } from './actions';
 import { getFetchDepartment } from '@pages/Admin/Department/actions';
+import { selectToken } from '@containers/Client/selectors';
+import { jwtDecode } from 'jwt-decode';
 
-const FormEmployee = ({ employeeDetail, department }) => {
+const FormEmployee = ({  department, token }) => {
   const intl = useIntl();
   const { id } = useParams();
   const navigate = useNavigate();
@@ -28,6 +30,13 @@ const FormEmployee = ({ employeeDetail, department }) => {
   const [selectedOption, setSelectedOption] = useState('');
 
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    const dataToken = jwtDecode(token);
+    if (dataToken.isAdmin === false) {
+      navigate('/user'); // Jika user adalah admin, navigasi ke halaman admin
+    }
+  }, [navigate]);
 
   useEffect(() => {
     dispatch(getFetchDepartment());
@@ -168,12 +177,14 @@ const FormEmployee = ({ employeeDetail, department }) => {
 
 FormEmployee.prototypes = {
   employeeDetail: PropTypes.array,
-  department: PropTypes.array
+  department: PropTypes.array,
+  token: PropTypes.string
 };
 
 const mapStateToProps = createStructuredSelector({
   employeeDetail: selectEmployeeDetail,
-  department: selectDepartment
+  department: selectDepartment,
+  token: selectToken
 });
 
 export default connect(mapStateToProps)(FormEmployee);

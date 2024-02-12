@@ -14,6 +14,7 @@ import { eyeOff } from 'react-icons-kit/feather/eyeOff';
 import { eye } from 'react-icons-kit/feather/eye';
 import { doLoginAction } from './actions';
 import { selectToken } from '@containers/Client/selectors';
+import { getFetchProfile } from '@pages/Admin/Profile/actions';
 
 const Login = ({ token }) => {
   const [type, setType] = useState('password');
@@ -43,7 +44,7 @@ const Login = ({ token }) => {
         email: encryptPayload(email),
         password: encryptPayload(password),
       };
-      dispatch(doLoginAction(dataUser));
+      dispatch(doLoginAction(dataUser), () => navigate("/admin"));
     }
   };
 
