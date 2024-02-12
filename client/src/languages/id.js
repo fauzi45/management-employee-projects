@@ -1,5 +1,5 @@
 export default {
-  app_greeting: 'Hai dari Web!',
+  app_greeting: 'Selamat Datang',
   app_title_header: 'Manajemen Karyawan',
   app_not_found: 'Halaman tidak ditemukan',
   app_lang_id: 'Bahasa Indonesia',

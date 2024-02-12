@@ -1,5 +1,5 @@
 export default {
-  app_greeting: 'Hi from Web!',
+  app_greeting: 'Welcome ',
   app_title_header: 'Management Employee',
   app_not_found: 'Page not found',
   app_lang_id: 'Indonesian',
@@ -31,7 +31,7 @@ export default {
   app_placeholder_search: 'Search',
   app_no_data: 'Data Empty',
   app_no_data_filter: 'No matching data found',
-  app_text_noaccount: 'No Account? Register here',
+  app_text_noacc: 'No Account? Register here',
   app_text_haveacc: 'Already have an account? Login here',
 
 
