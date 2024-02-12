@@ -84,10 +84,23 @@ const getMyTeamProject = async (request, reply) => {
   }
 }
 
+const getDetailMyTeamProject = async (request, reply) => {
+  try {
+    const dataEmployee = request.header.employeeToken;
+    const { id } = request.params;
+    const teamProject = await AuthHelper.getDetailMyTeamProjectHelper(dataEmployee,id);
+    return reply.send(teamProject);
+  }catch (err) {
+    console.log([fileName, "getMyTeamProject", "ERROR"], { info: `${err}` });
+    return reply.send(GeneralHelper.errorResponse(err));
+  }
+}
+
 Router.post("/register", register);
 Router.post("/login", login);
 Router.get("/hello", Middleware.validateToken, hello);
 Router.get("/getUser", Middleware.validateToken, getUser);
 Router.get("/getMyTeamProject", Middleware.validateToken, getMyTeamProject);
+Router.get("/getMyTeamProject/detail/:id", Middleware.validateToken, getDetailMyTeamProject);
 
 module.exports = Router;

@@ -24,9 +24,8 @@ const listDepartment = async (req, res) => {
 const createDepartment = async (req, res) => {
   try {
     ValidationDepartmentHelper.createDepartmentValidation(req.body);
-    const {name} = req.body;
     const response = await DepartmentHelper.createDepartmentHelper({
-      name: name,
+      name: req.body.name,
     });
     return res.send(response);
   } catch (err) {

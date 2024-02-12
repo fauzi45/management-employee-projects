@@ -40,8 +40,6 @@ const detailProject = async (req, res) => {
 
 const createProject = async (req, res) => {
   try {
-    console.log(req.files,"<<<<<<files")
-    console.log(req.body,"<<<<<<<<<bodyyy>>>")
     if (req?.fileValidationError)
       return res.status(400).json({ message: req.fileValidationError.message });
 

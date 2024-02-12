@@ -141,7 +141,50 @@ const getMyTeamProjectHelper = async (dataEmployee) => {
     });
     if (_.isEmpty(checkTeamProject)) {
       return { message: "YOUR TEAM PROJECT IS EMPTY" };
-      }
+    }
+    return Promise.resolve(checkTeamProject);
+  } catch (err) {
+    console.log([fileName, "getMyTeamProject", "ERROR"], { info: `${err}` });
+    return Promise.reject(GeneralHelper.errorResponse(err));
+  }
+};
+const getDetailMyTeamProjectHelper = async (dataEmployee, id) => {
+  try {
+    const checkTeamProject = await db.TeamProjects.findOne({
+      include: [
+        {
+          model: db.Employees,
+          as: "employee",
+          include: [
+            {
+              model: db.Departments,
+              as: "department",
+              attributes: { exclude: ["createdAt", "updatedAt"] },
+            },
+          ],
+          attributes: {
+            exclude: ["createdAt", "updatedAt"],
+          },
+        },
+        {
+          model: db.Projects,
+          as: "project",
+          attributes: {
+            exclude: ["createdAt", "updatedAt"],
+          },
+        },
+      ],
+      attributes: {
+        exclude: ["createdAt", "updatedAt"],
+      },
+      where: {
+        employeeId: dataEmployee.employeeId,
+        id: id,
+      },
+    });
+    if (_.isEmpty(checkTeamProject)) {
+      return Promise.reject(Boom.notFound("Team project not found"));
+    }
     return Promise.resolve(checkTeamProject);
   } catch (err) {
     console.log([fileName, "getMyTeamProject", "ERROR"], { info: `${err}` });
@@ -154,4 +197,5 @@ module.exports = {
   login,
   getUserHelper,
   getMyTeamProjectHelper,
+  getDetailMyTeamProjectHelper,
 };

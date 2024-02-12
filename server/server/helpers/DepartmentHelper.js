@@ -16,7 +16,8 @@ const getDepartmentListHelper = async () => {
   }
 };
 
-const createDepartmentHelper = async (name) => {
+const createDepartmentHelper = async (dataObject) => {
+  const {name} = dataObject
   try {
     await db.Departments.create({
       name: name,
