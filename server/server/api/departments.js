@@ -24,8 +24,10 @@ const listDepartment = async (req, res) => {
 const createDepartment = async (req, res) => {
   try {
     ValidationDepartmentHelper.createDepartmentValidation(req.body);
-    const { name } = req.body;
-    const response = await DepartmentHelper.createDepartmentHelper(name);
+    const {name} = req.body;
+    const response = await DepartmentHelper.createDepartmentHelper({
+      name: name,
+    });
     return res.send(response);
   } catch (err) {
     console.log([fileName, "createDepartment", "ERROR"], { info: `${err}` });
@@ -67,7 +69,7 @@ const updateDepartment = async (req, res) => {
 
 const deleteDepartment = async (req, res) => {
   try {
-    ValidationProjectHelper.deleteProjectValidation(req.params);
+    ValidationDepartmentHelper.deleteDepartmentValidation(req.params);
     const { id } = req.params;
     const response = await DepartmentHelper.deleteDepartmentHelper(id);
     return res.status(200).send({
@@ -81,7 +83,10 @@ const deleteDepartment = async (req, res) => {
 };
 
 Router.get("/departmentList", listDepartment);
-Router.post("/create", createDepartment);
+Router.post(
+  "/create",
+  createDepartment
+);
 Router.get("/detail/:id", detailDepartment);
 Router.put("/update/:id", updateDepartment);
 Router.delete("/delete/:id", deleteDepartment);
