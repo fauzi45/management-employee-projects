@@ -109,7 +109,7 @@ const routes = [
   },
 
   {
-    path: '/user/',
+    path: '/user',
     name: 'Home User',
     protected: true,
     component: HomeUser,

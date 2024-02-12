@@ -9,7 +9,6 @@ function* doGetProfile() {
   yield put(setLoading(true));
   try {
     const response = yield call(getUser);
-    console.log(response)
     yield put(setProfile(response));
   } catch (error) {
     yield put(showPopup(error.info));

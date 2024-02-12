@@ -46,7 +46,7 @@ const Navbar = ({ title, locale, theme, token }) => {
   };
 
   const goHome = () => {
-    navigate('/');
+    navigate('/admin');
   };
 
   return (

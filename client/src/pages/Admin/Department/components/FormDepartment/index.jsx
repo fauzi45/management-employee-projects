@@ -11,6 +11,8 @@ import { addNewDepartment, getDetailDepartment, setDetailDepartment, setUpdateDe
 
 import toast, { Toaster } from 'react-hot-toast';
 
+import PropTypes from 'prop-types';
+
 import { createStructuredSelector } from 'reselect';
 import { selectDepartmentDetail } from './selector';
 
@@ -29,10 +31,8 @@ const FormDepartment = ({ departmentDetail }) => {
       dispatch(getDetailDepartment(id));
     } else {
       dispatch(setDetailDepartment(null));
-
     }
   }, [id]);
-
 
   useEffect(() => {
     if (departmentDetail) {
@@ -52,12 +52,10 @@ const FormDepartment = ({ departmentDetail }) => {
     } else {
       if (id) {
         dispatch(
-          setUpdateDepartment(id,
-            formDataSend, () => {
-              navigate('/admin/department');
-            }
-          )
-        )
+          setUpdateDepartment(id, formDataSend, () => {
+            navigate('/admin/department');
+          })
+        );
       } else {
         dispatch(
           addNewDepartment(formDataSend, () => {
@@ -71,7 +69,11 @@ const FormDepartment = ({ departmentDetail }) => {
   return (
     <div className={classes.container}>
       <div className={classes.title}>
-        {id ? <FormattedMessage id="app_text_department_update" /> : <FormattedMessage id="app_text_department_create" />}
+        {id ? (
+          <FormattedMessage id="app_text_department_update" />
+        ) : (
+          <FormattedMessage id="app_text_department_create" />
+        )}
       </div>
 
       <div className={classes.containercontent}>
@@ -97,8 +99,12 @@ const FormDepartment = ({ departmentDetail }) => {
   );
 };
 
+FormDepartment.prototypes = {
+  departmentDetail: PropTypes.array,
+};
+
 const mapStateToProps = createStructuredSelector({
-  departmentDetail: selectDepartmentDetail
+  departmentDetail: selectDepartmentDetail,
 });
 
 export default connect(mapStateToProps)(FormDepartment);

@@ -53,11 +53,11 @@ const Project = ({ project, token }) => {
     setData(project);
   }, [project]);
 
-  useEffect(() => {
-    if (!token) {
-      navigate('/login');
-    }
-  }, [token]);
+  // useEffect(() => {
+  //   if (!token) {
+  //     navigate('/login');
+  //   }
+  // }, [token]);
 
 
   const handleChangePage = (event, newPage) => {
