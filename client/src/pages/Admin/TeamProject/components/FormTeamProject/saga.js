@@ -1,48 +1,48 @@
-import { detailProject, newProject, updateProject } from '@domain/api';
-import { ADD_NEW_PROJECT, GET_DETAIL_PROJECT, UPDATE_PROJECT } from './constants';
+import { detailTeamProject, newTeamProject, updateTeamProject } from '@domain/api';
+import { ADD_NEW_TEAM_PROJECT, GET_DETAIL_TEAM_PROJECT, UPDATE_TEAM_PROJECT } from './constants';
 import { takeLatest, call, put } from 'redux-saga/effects';
 import { setLoading, showPopup } from '@containers/App/actions';
-import { setDetailProject } from './actions';
 
 import toast, { Toaster } from 'react-hot-toast';
+import { setDetailTeamProject } from './actions';
 
-function* doNewProject({ data, cb }) {
+function* doNewTeamProject({ data, cb }) {
   yield put(setLoading(true));
   try {
-    yield call(newProject, data);
+    yield call(newTeamProject, data);
     cb();
-    toast.success('Project Successfully created');
+    toast.success('Team Project Successfully created');
   } catch (error) {
     yield put(showPopup(error.info));
   }
   yield put(setLoading(false));
 }
 
-function* doGetDetailProject({ id }) {
+function* doGetDetailTeamProject({ id }) {
   yield put(setLoading(true));
   try {
-    const response = yield call(detailProject, id);
-    yield put(setDetailProject(response.data));
+    const response = yield call(detailTeamProject, id);
+    yield put(setDetailTeamProject(response.data));
   } catch (error) {
     yield put(showPopup(error.info));
   }
   yield put(setLoading(false));
 }
 
-function* doUpdateProject({id, data, cb }) {
+function* doUpdateTeamProject({id, data, cb }) {
   yield put(setLoading(true));
   try {
-    yield call(updateProject,id, data);
+    yield call(updateTeamProject,id, data);
     cb();
-    toast.success('Project Successfully updated');
+    toast.success('Team Project Successfully updated');
   } catch (error) {
     yield put(showPopup(error.info));
   }
   yield put(setLoading(false));
 }
 
-export default function* newProjectSaga() {
-  yield takeLatest(ADD_NEW_PROJECT, doNewProject);
-  yield takeLatest(GET_DETAIL_PROJECT, doGetDetailProject);
-  yield takeLatest(UPDATE_PROJECT, doUpdateProject);
+export default function* newTeamProjectSaga() {
+  yield takeLatest(ADD_NEW_TEAM_PROJECT, doNewTeamProject);
+  yield takeLatest(GET_DETAIL_TEAM_PROJECT, doGetDetailTeamProject);
+  yield takeLatest(UPDATE_TEAM_PROJECT, doUpdateTeamProject);
 }
