@@ -1,9 +1,9 @@
 {
 	"info": {
-		"_postman_id": "cf4d5122-0b7b-4580-bc91-0f7416346315",
-		"name": "Team Project API",
+		"_postman_id": "6caaa461-093f-4f89-ad3f-8b9eace79b21",
+		"name": "Team Project API Copy",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "23640195"
+		"_exporter_id": "32533899"
 	},
 	"item": [
 		{
@@ -67,7 +67,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbXBsb3llZUlkIjo4LCJpc0FkbWluIjpmYWxzZSwiaWF0IjoxNzA3NjYyNjQ1LCJleHAiOjE3MDc3NDkwNDV9.W3DFbMmjtdlwOXjbMBzJrwOipYQHv8qwmgcQ3t1wU90",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbXBsb3llZUlkIjoyLCJpc0FkbWluIjpmYWxzZSwiaWF0IjoxNzA3NzI4MDIwLCJleHAiOjE3MDc4MTQ0MjB9.etqLZa9jT7MSK4nbYda1CUjpVOPowvlSpS0NRPdBrIo",
 									"type": "string"
 								}
 							]
@@ -261,35 +261,39 @@
 				},
 				{
 					"name": "CREATE Department",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {}
+					},
 					"request": {
 						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"name\": \"test2\"\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "multipart/form-data;",
+								"type": "text",
+								"disabled": true
 							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "name",
+									"value": "test",
+									"type": "text"
+								}
+							]
 						},
 						"url": {
-							"raw": "localhost:8080/api/department/create",
+							"raw": "localhost:5000/api/department/create",
 							"host": [
 								"localhost"
 							],
-							"port": "8080",
+							"port": "5000",
 							"path": [
 								"api",
 								"department",
 								"create"
-							],
-							"query": [
-								{
-									"key": "",
-									"value": "",
-									"disabled": true
-								}
 							]
 						}
 					},
@@ -331,16 +335,16 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "localhost:8080/api/department/delete/3",
+							"raw": "localhost:5000/api/department/delete/322",
 							"host": [
 								"localhost"
 							],
-							"port": "8080",
+							"port": "5000",
 							"path": [
 								"api",
 								"department",
 								"delete",
-								"3"
+								"322"
 							]
 						}
 					},
@@ -394,17 +398,54 @@
 				},
 				{
 					"name": "CREATE project",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {}
+					},
 					"request": {
 						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"name\": \"Mancingers\",\r\n    \"description\": \"Membuat sebuah yyy\",\r\n    \"startDate\": \"2024-02-14\",\r\n    \"endDate\": \"2024-03-14\"\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "multipart/form-data;",
+								"type": "text",
+								"disabled": true
 							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "name",
+									"value": "test2",
+									"type": "text"
+								},
+								{
+									"key": "description",
+									"value": "testing",
+									"type": "text"
+								},
+								{
+									"key": "startDate",
+									"value": "2024-02-17",
+									"type": "text"
+								},
+								{
+									"key": "endDate",
+									"value": "2024-02-20",
+									"type": "text"
+								},
+								{
+									"key": "status",
+									"value": "0",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "imageUrl",
+									"type": "file",
+									"src": "/C:/uji/week2/delicacy/src/assets/images/image1.jpg"
+								}
+							]
 						},
 						"url": {
 							"raw": "localhost:5000/api/project/create",
