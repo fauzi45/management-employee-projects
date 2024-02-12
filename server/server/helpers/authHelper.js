@@ -140,8 +140,8 @@ const getMyTeamProjectHelper = async (dataEmployee) => {
       },
     });
     if (_.isEmpty(checkTeamProject)) {
-      return Promise.reject(Boom.notFound("TEAM_PROJECT_NOT_FOUND"));
-    }
+      return { message: "YOUR TEAM PROJECT IS EMPTY" };
+      }
     return Promise.resolve(checkTeamProject);
   } catch (err) {
     console.log([fileName, "getMyTeamProject", "ERROR"], { info: `${err}` });
