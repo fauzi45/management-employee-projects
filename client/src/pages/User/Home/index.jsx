@@ -12,9 +12,9 @@ import { selectMyTeam } from './selector';
 import { useNavigate } from 'react-router-dom';
 import { getFetchMyTeam, setMyTeam } from './actions';
 import { jwtDecode } from 'jwt-decode';
-import { getFetchProfile, setProfile } from '@pages/Admin/Profile/actions';
+import { getFetchProfile } from '@pages/Admin/Profile/actions';
 import { SelectProfile } from '@pages/Admin/Profile/selector';
-const HomeUser = ({ myTeam, profile }) => {
+const HomeUser = ({ myTeam,token }) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [data, setData] = useState([]);
@@ -33,7 +33,8 @@ const HomeUser = ({ myTeam, profile }) => {
   }, [myTeam]);
 
   useEffect(() => {
-    if (profile.isAdmin === true) {
+  const dataToken = jwtDecode(token);
+    if (dataToken.isAdmin === true) {
       navigate('/admin'); // Jika user adalah admin, navigasi ke halaman admin
     }
   }, [navigate]);
@@ -58,13 +59,11 @@ const HomeUser = ({ myTeam, profile }) => {
 
 HomeUser.prototypes = {
   token: PropTypes.string,
-  profile: PropTypes.array,
   myTeam: PropTypes.array
 };
 
 const mapStateToProps = createStructuredSelector({
   token: selectToken,
-  profile: SelectProfile,
   myTeam: selectMyTeam,
 });
 

@@ -13,6 +13,7 @@ import FormProject from '@pages/Admin/Project/components/FormProject';
 import FormEmployee from '@pages/Admin/Employee/components/FormEmployee';
 import FormTeamProject from '@pages/Admin/TeamProject/components/FormTeamProject';
 import HomeUser from '@pages/User/Home';
+import Detail from '@pages/User/Detail';
 
 const routes = [
   {
@@ -113,6 +114,13 @@ const routes = [
     name: 'Home User',
     protected: true,
     component: HomeUser,
+    layout: MainLayout,
+  },
+  {
+    path: '/user/my-project/:id',
+    name: 'My Project',
+    protected: true,
+    component: Detail,
     layout: MainLayout,
   },
   {
