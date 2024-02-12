@@ -14,7 +14,6 @@ import { selectProjectDetail } from './selector';
 import { addNewProject, getDetailProject, setDetailProject, setUpdateProject } from './actions';
 
 const FormProject = ({ projectDetail }) => {
-
   const intl = useIntl();
   const { id } = useParams();
   const navigate = useNavigate();
@@ -24,6 +23,7 @@ const FormProject = ({ projectDetail }) => {
     startDate: '',
     endDate: '',
     status: '',
+    imageUrl: '',
   });
 
   const dispatch = useDispatch();
@@ -33,7 +33,6 @@ const FormProject = ({ projectDetail }) => {
       dispatch(getDetailProject(id));
     } else {
       dispatch(setDetailProject(null));
-
     }
   }, [id]);
 
@@ -47,17 +46,18 @@ const FormProject = ({ projectDetail }) => {
         startDate: '',
         endDate: '',
         status: '',
+        imageUrl: '',
       });
     }
   }, [projectDetail]);
-
+  console.log(formData)
   const submitData = () => {
     const formDataSend = new FormData();
     formDataSend.append('name', formData.name);
+    formDataSend.append('imageUrl', formData.imageUrl);
     formDataSend.append('description', formData.description);
     formDataSend.append('startDate', formData.startDate);
     formDataSend.append('endDate', formData.endDate);
-
     if (id) {
       formDataSend.append('status', formData.status);
     }
@@ -69,16 +69,13 @@ const FormProject = ({ projectDetail }) => {
       toast.error('Start Date cannot be empty');
     } else if (!formData.endDate) {
       toast.error('End Date cannot be empty');
-    }
-    else {
+    } else {
       if (id) {
         dispatch(
-          setUpdateProject(id,
-            formDataSend, () => {
-              navigate('/admin/project');
-            }
-          )
-        )
+          setUpdateProject(id, formDataSend, () => {
+            navigate('/admin/project');
+          })
+        );
       } else {
         dispatch(
           addNewProject(formDataSend, () => {
@@ -106,6 +103,10 @@ const FormProject = ({ projectDetail }) => {
           value={formData.name}
           onChange={(e) => setFormData((data) => ({ ...data, name: e.target.value }))}
         />
+        <div className={classes.subTitle}>
+          <FormattedMessage id="app_text_project_image" />
+        </div>
+        <input className={classes.inputTitle} name='imageUrl' type="file" onChange={(e) => setFormData((data) => ({ ...data, imageUrl: e.target.files[0] }))} />
         <div className={classes.subTitle}>
           <FormattedMessage id="app_table_description" />
         </div>
@@ -137,9 +138,8 @@ const FormProject = ({ projectDetail }) => {
           onChange={(e) => setFormData((data) => ({ ...data, endDate: e.target.value }))}
         />
         {id ? (
-          <div><div className={classes.subTitle}>
-            Status
-          </div>
+          <div>
+            <div className={classes.subTitle}>Status</div>
             <div className={classes.inputRadio}>
               <input
                 type="radio"
@@ -159,8 +159,11 @@ const FormProject = ({ projectDetail }) => {
                 onChange={() => setFormData((data) => ({ ...data, status: true }))}
               />
               <label htmlFor="status_done">Done</label>
-            </div></div>
-        ) : ""}
+            </div>
+          </div>
+        ) : (
+          ''
+        )}
 
         <div className={classes.post}>
           <Button onClick={submitData} variant="contained">
@@ -174,7 +177,7 @@ const FormProject = ({ projectDetail }) => {
 };
 
 const mapStateToProps = createStructuredSelector({
-  projectDetail: selectProjectDetail
+  projectDetail: selectProjectDetail,
 });
 
 export default connect(mapStateToProps)(FormProject);

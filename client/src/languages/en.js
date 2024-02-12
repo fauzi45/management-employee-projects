@@ -43,6 +43,7 @@ export default {
   app_text_project: 'Project',
   app_text_project_create: 'Create Project',
   app_text_project_update: 'Update Project',
+  app_text_project_image: 'Image',
 
   app_text_employee: 'Employee',
   app_text_employee_create: 'Create Employee',

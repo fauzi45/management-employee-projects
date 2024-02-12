@@ -14,7 +14,7 @@ const Card = ({ data  }) => {
 
   return (
     <div className={classes.container}>
-      <img src={data?.imageUrl} className={classes.image} />
+      <img src={data?.project?.imageUrl} className={classes.image} />
       <div className={classes.content}>
         <p className={classes.title}>{data?.name}</p>
         <p className={classes.date}>{data?.project?.startDate.substring(0,10)} - {data?.project?.endDate.substring(0,10)}</p>

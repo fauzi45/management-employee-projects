@@ -42,6 +42,7 @@ export default {
   app_text_project: 'Projek',
   app_text_project_create: 'Buat Project',
   app_text_project_update: 'Ubah Project',
+  app_text_project_image: 'Gambar',
   
   app_text_employee: 'Pegawai',
   app_text_employee_create: 'Buat Pegawai',
