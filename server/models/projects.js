@@ -22,7 +22,8 @@ module.exports = (sequelize, DataTypes) => {
     description: DataTypes.STRING,
     startDate: DataTypes.DATE,
     endDate: DataTypes.DATE,
-    status: DataTypes.BOOLEAN
+    status: DataTypes.BOOLEAN,
+    imageUrl: DataTypes.STRING
   }, {
     sequelize,
     modelName: 'Projects',

@@ -6,6 +6,8 @@ const GeneralHelper = require("../helpers/generalHelper");
 
 const ValidationProjectHelper = require("../validation/ValidationProject");
 
+const uploadMedia = require("../middlewares/uploadMedia");
+
 const fileName = "server/api/projects.js";
 
 const listProject = async (req, res) => {
@@ -38,13 +40,20 @@ const detailProject = async (req, res) => {
 
 const createProject = async (req, res) => {
   try {
+    console.log(req.files,"<<<<<<files")
+    console.log(req.body,"<<<<<<<<<bodyyy>>>")
+    if (req?.fileValidationError)
+      return res.status(400).json({ message: req.fileValidationError.message });
+
+    if (!req?.files?.imageUrl)
+      return res.status(400).json({ message: "File is required" });
     ValidationProjectHelper.createProjectValidation(req.body);
-    const { name, description, startDate, endDate } = req.body;
     const response = await ProjectHelper.createProjectHelper({
-      name,
-      description,
-      startDate,
-      endDate,
+      name: req.body.name,
+      description: req.body.description,
+      startDate: req.body.startDate,
+      endDate: req.body.endDate,
+      image: req.files.imageUrl[0],
     });
     return res.send({
       message: "Project data successfully created",
@@ -97,7 +106,11 @@ const deleteProject = async (req, res) => {
 
 Router.get("/projectList", listProject);
 Router.get("/detail/:id", detailProject);
-Router.post("/create", createProject);
+Router.post(
+  "/create",
+  uploadMedia.fields([{ name: "imageUrl", maxCount: 1 }]),
+  createProject
+);
 Router.put("/update/:id", updateProject);
 Router.delete("/delete/:id", deleteProject);
 

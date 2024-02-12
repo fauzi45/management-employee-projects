@@ -73,7 +73,8 @@ export const updateDepartment = (id, data) => callAPI(`${urls.updateDepartment}/
 export const deleteDepartment = (id) => callAPI(`${urls.deleteDepartment}/${id}`, 'DELETE');
 
 export const fetchProject = () => callAPI(urls.allProject, 'GET');
-export const newProject = (data) => callAPI(urls.createProject, 'POST', {}, {}, data);
+export const newProject = (data) =>
+  callAPI(urls.createProject, 'POST', { 'Content-Type': 'multipart/form-data; charset=UTF-8' }, {}, data);
 export const detailProject = (id) => callAPI(`${urls.detailProject}/${id}`, 'GET');
 export const updateProject = (id, data) => callAPI(`${urls.updateProject}/${id}`, 'PUT', {}, {}, data);
 export const deleteProject = (id) => callAPI(`${urls.deleteProject}/${id}`, 'DELETE');

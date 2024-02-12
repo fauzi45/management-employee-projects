@@ -3,6 +3,10 @@ const _ = require("lodash");
 const GeneralHelper = require("./generalHelper");
 const Boom = require("boom");
 const fileName = "server/helpers/ProjectHelper.js";
+const {
+  uploadToCloudinary,
+  cloudinaryDeleteImg,
+} = require("../../utils/cloudinary");
 
 const getProjectListHelper = async () => {
   try {
@@ -39,14 +43,16 @@ const getProjectDetailHelper = async (id) => {
 };
 
 const createProjectHelper = async (dataObject) => {
-  const { name, description, startDate, endDate } = dataObject;
+  const { name, description, startDate, endDate, image } = dataObject;
   try {
+    const imageResult = await uploadToCloudinary(image, "image");
     await db.Projects.create({
       name,
       description,
       startDate,
       endDate,
       status: false,
+      imageUrl: imageResult?.url,
     });
     return Promise.resolve(true);
   } catch (err) {
@@ -57,7 +63,14 @@ const createProjectHelper = async (dataObject) => {
   }
 };
 
-const updateProjectHelper = async (id, name, description, startDate, endDate, status) => {
+const updateProjectHelper = async (
+  id,
+  name,
+  description,
+  startDate,
+  endDate,
+  status
+) => {
   try {
     const checkProject = await db.Projects.findOne({
       where: { id: id },
@@ -68,11 +81,15 @@ const updateProjectHelper = async (id, name, description, startDate, endDate, st
       );
     } else {
       await db.Projects.update(
-        { name: name ? name : checkProject.dataValues.name,
-          description: description ? description : checkProject.dataValues.description,
+        {
+          name: name ? name : checkProject.dataValues.name,
+          description: description
+            ? description
+            : checkProject.dataValues.description,
           startDate: startDate ? startDate : checkProject.dataValues.startDate,
           endDate: endDate ? endDate : checkProject.dataValues.endDate,
-          status: status ? status : checkProject.dataValues.status, },
+          status: status ? status : checkProject.dataValues.status,
+        },
         { where: { id: id } }
       );
     }
