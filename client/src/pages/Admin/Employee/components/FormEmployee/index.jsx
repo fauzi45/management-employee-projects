@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { connect, useDispatch } from 'react-redux';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { useNavigate, useParams } from 'react-router-dom';
-
+import PropTypes from 'prop-types';
 import Button from '@mui/material/Button';
 
 import classes from './style.module.scss';
@@ -15,6 +15,7 @@ import { createStructuredSelector } from 'reselect';
 import { selectEmployeeDetail } from './selector';
 import { selectDepartment } from '@pages/Admin/Department/selector';
 import { addNewEmployee } from './actions';
+import { getFetchDepartment } from '@pages/Admin/Department/actions';
 
 const FormEmployee = ({ employeeDetail, department }) => {
   const intl = useIntl();
@@ -27,6 +28,10 @@ const FormEmployee = ({ employeeDetail, department }) => {
   const [selectedOption, setSelectedOption] = useState('');
 
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getFetchDepartment());
+  }, [dispatch]);
 
   // useEffect(() => {
   //   if (id) {
@@ -159,6 +164,11 @@ const FormEmployee = ({ employeeDetail, department }) => {
       <Toaster />
     </div>
   );
+};
+
+FormEmployee.prototypes = {
+  employeeDetail: PropTypes.array,
+  department: PropTypes.array
 };
 
 const mapStateToProps = createStructuredSelector({

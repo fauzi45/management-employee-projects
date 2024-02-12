@@ -33,6 +33,8 @@ import toast, { Toaster } from 'react-hot-toast';
 import { jwtDecode } from "jwt-decode";
 import { selectToken } from '@containers/Client/selectors';
 
+import PropTypes from 'prop-types';
+
 const Employee = ({ employee, token }) => {
   const intl = useIntl();
   const navigate = useNavigate();
@@ -187,6 +189,11 @@ const Employee = ({ employee, token }) => {
       <Toaster />
     </div>
   );
+};
+
+Employee.prototypes = {
+  token: PropTypes.string,
+  employee: PropTypes.array
 };
 
 const mapStateToProps = createStructuredSelector({
