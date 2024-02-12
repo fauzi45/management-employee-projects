@@ -1,24 +1,29 @@
-import { ADD_NEW_PROJECT, GET_DETAIL_PROJECT, SET_DETAIL_PROJECT, UPDATE_PROJECT } from "./constants";
+import {
+  ADD_NEW_TEAM_PROJECT,
+  GET_DETAIL_TEAM_PROJECT,
+  SET_DETAIL_TEAM_PROJECT,
+  UPDATE_TEAM_PROJECT,
+} from './constants';
 
-export const addNewProject = (data,cb) => ({
-    type: ADD_NEW_PROJECT,
-    data,
-    cb
+export const addNewTeamProject = (data, cb) => ({
+  type: ADD_NEW_TEAM_PROJECT,
+  data,
+  cb,
 });
 
-export const getDetailProject = (id) => ({
-    type: GET_DETAIL_PROJECT,
-    id
+export const getDetailTeamProject = (id) => ({
+  type: GET_DETAIL_TEAM_PROJECT,
+  id,
 });
 
-export const setDetailProject = (data) => ({
-    type: SET_DETAIL_PROJECT,
-    data
+export const setDetailTeamProject = (data) => ({
+  type: SET_DETAIL_TEAM_PROJECT,
+  data,
 });
 
-export const setUpdateProject = (id,data,cb) => ({
-    type: UPDATE_PROJECT,
-    id,
-    data,
-    cb
-})
+export const setUpdateTeamProject = (id, data, cb) => ({
+  type: UPDATE_TEAM_PROJECT,
+  id,
+  data,
+  cb,
+});

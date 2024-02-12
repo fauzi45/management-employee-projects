@@ -1,5 +1,5 @@
 import { produce } from 'immer';
-import { ADD_NEW_PROJECT, SET_DETAIL_PROJECT } from './constants';
+import { ADD_NEW_TEAM_PROJECT, SET_DETAIL_TEAM_PROJECT } from './constants';
 
 export const initialState = {
   data: {},
@@ -7,13 +7,13 @@ export const initialState = {
 
 export const storedKey = ['data'];
 
-const createNewProject = (state = initialState, action) =>
+const createNewTeamProject = (state = initialState, action) =>
   produce(state, (draft) => {
     switch (action.type) {
-      case ADD_NEW_PROJECT:
+      case ADD_NEW_TEAM_PROJECT:
         draft.data = action.data;
         break;
-      case SET_DETAIL_PROJECT:
+      case SET_DETAIL_TEAM_PROJECT:
         draft.data = action.data;
         break;
       default:
@@ -21,4 +21,4 @@ const createNewProject = (state = initialState, action) =>
     }
   });
 
-export default createNewProject;
+export default createNewTeamProject;

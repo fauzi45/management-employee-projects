@@ -140,7 +140,6 @@ const Employee = ({ employee, token }) => {
                       <TableCell align="center">{row.name} {row.id === decoded.employeeId ? "(You)" : ""}</TableCell>
                       <TableCell align="center">{row.email}</TableCell>
                       <TableCell align="center">{row.position}</TableCell>
-                      <TableCell align="center">{row.department.name}</TableCell>
                       <TableCell align="center">
                         {row.id === decoded.employeeId ? "" :
                           <IconButton aria-label="delete" onClick={() => handleDelete(row.id)}>

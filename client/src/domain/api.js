@@ -8,6 +8,7 @@ const urls = {
   register: 'auth/register',
   login: 'auth/login',
   getUser: 'auth/getUser',
+  getMyTeam: 'auth/getMyTeamProject',
 
   allDepartment: 'department/departmentList',
   createDepartment: 'department/create',
@@ -64,7 +65,7 @@ export const login = (login) => {
 };
 
 export const getUser = () => callAPI(urls.getUser, 'GET');
-
+export const getMyTeam = () => callAPI(urls.getMyTeam, 'GET');
 export const fetchDepartment = () => callAPI(urls.allDepartment, 'GET');
 export const newDepartment = (data) => callAPI(urls.createDepartment, 'POST', {}, {}, data);
 export const detailDepartment = (id) => callAPI(`${urls.detailDepartment}/${id}`, 'GET');
