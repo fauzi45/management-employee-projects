@@ -12,10 +12,11 @@ import CreateDepartment from '@pages/Admin/Department/components/FormDepartment'
 import FormProject from '@pages/Admin/Project/components/FormProject';
 import FormEmployee from '@pages/Admin/Employee/components/FormEmployee';
 import FormTeamProject from '@pages/Admin/TeamProject/components/FormTeamProject';
+import HomeUser from '@pages/User/Home';
 
 const routes = [
   {
-    path: '/',
+    path: '/admin',
     name: 'Home',
     protected: true,
     component: Home,
@@ -104,6 +105,14 @@ const routes = [
     name: 'Form Project',
     protected: true,
     component: FormTeamProject,
+    layout: MainLayout,
+  },
+
+  {
+    path: '/user/',
+    name: 'Home User',
+    protected: true,
+    component: HomeUser,
     layout: MainLayout,
   },
   {

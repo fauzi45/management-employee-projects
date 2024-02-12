@@ -49,7 +49,7 @@ const Login = ({ token }) => {
 
     useEffect(() => {
       if (token) {
-        navigate('/');
+        navigate('/admin');
       }
     }, [token]);
 
@@ -62,7 +62,6 @@ const Login = ({ token }) => {
   return (
     <div className={classes.container}>
       <div className={classes.image}></div>
-      {console.log(token)}
       <div className={classes.box}>
         <div className={classes.containerbox}>
           <div className={classes.title}>
